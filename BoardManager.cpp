@@ -8,7 +8,7 @@
 using namespace std;
 #include <iostream>
 
-BoardManager::BoardManager(int size) : board_size(size) {
+BoardManager::BoardManager(int size) : board_size(size), amountOfBlack(0), amountOfWhite(0) {
 	finder = new RegularRules();
 	this->Init();
 }
@@ -82,25 +82,9 @@ void BoardManager::AddToSum(Checker checker, int amount) {
 
 bool BoardManager::DoTurn(int row, int col, Checker to_put)
 {
-	Checker check_available, to_turn_around;
-	switch (to_put)
-	{
-	case Black:
-		check_available = AvailableB;
-		to_turn_around = White;
-		break;
-	case White:
-		check_available = AvailableW;
-		to_turn_around = Black;
-		break;
-	case Nothing:
-	case AvailableB:
-	case AvailableW:
-	case AvailableBoth:
-	default:
-		return false;
-		break;
-	}
+	Checker check_available = GetAvailableChecker(to_put);
+	Checker to_turn_around = GetOppsiteChecker(to_put);
+
 	if (!IsAvailable(row, col, check_available)) {
 		return false;
 	}
@@ -237,22 +221,7 @@ bool BoardManager::DoTurn(int row, int col, Checker to_put)
 }
 
 bool BoardManager::CheckPlayerAvailable(Checker color) const {
-	Checker available;
-	switch (color)
-	{
-	case Black:
-		available = AvailableB;
-		break;
-	case White:
-		available = AvailableW;
-		break;
-	case Nothing:
-	case AvailableB:
-	case AvailableW:
-	case AvailableBoth:
-	default:
-		return false;
-	}
+	Checker available = GetAvailableChecker(color);
 
 	for (int r = 0; r < this->board_size; r++) {
 		for (int c = 0; c < this->board_size; c++) {
@@ -279,8 +248,10 @@ bool BoardManager::CheckIfGameEnded() {
 Checker BoardManager::ReturnWinner() {
 	if (amountOfBlack < amountOfWhite) {
 		return White;
+	} else if (amountOfBlack > amountOfWhite) {
+		return Black;
 	}
-	return Black;
+	return Nothing;
 }
 
 int BoardManager::GetSize() const {

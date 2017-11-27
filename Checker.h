@@ -9,4 +9,3 @@ Checker GetOppsiteChecker(Checker checker);
 
 Checker GetAvailableChecker(Checker checker);
 #endif // !CHECKER_
-

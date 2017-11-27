@@ -14,7 +14,7 @@ class AvailableFinder
 public:
 	AvailableFinder();
 	virtual ~AvailableFinder();
-	//find all aviailable - do nothing, childs will
+	//find all available - do nothing, childs will
 	virtual void FindAllAvailable(Matrix<Checker>& board, int board_size);
 	virtual AvailableFinder* GetClone();
 };

@@ -4,11 +4,10 @@ ID: 315240564
 */
 
 #include "GameManager.h"
-#include "RegularRules.h"
 #include "ConsolePlayer.h"
 #include "ConsolePrinter.h"
 
-GameManager::GameManager(int size_, BoardManager& board_) : board_size(size_), board(board_) {
+GameManager::GameManager(BoardManager& board_) : board(board_) {
 	printer = new ConsolePrinter();
 	white = new ConsolePlayer(White, board, printer);
 	black = new ConsolePlayer(Black, board, printer);
@@ -42,33 +41,30 @@ void GameManager::StartGame() {
 	Checker player = White;
 	while (true) {
 		board.FindAllAvailable();
-		printer->PrintBoard(board.GetBoard(), board_size);
+		printer->PrintBoard(board.GetBoard(), board.GetSize());
 		printer->PrintTurnOf(player);
 		if (!board.CheckPlayerAvailable(player)) {
 			printer->PrintMessage("You don't have any available moves...");
 			if (board.CheckIfGameEnded()) {
 				player = board.ReturnWinner();
-				printer->PrintWinnerMessage(player);
+				if (player == Nothing) {
+					printer->PrintMessage("It's a tie!");
+				} else {
+					printer->PrintWinnerMessage(player);
+				}
 				break;
 			}
 			printer->PrintMessage("Turn go to next player");
-			player = GetOppositeColor(player);
+			player = GetOppsiteChecker(player);
 			continue;
 		}
-		printer->PrintAvilable(board.GetBoard(), board_size, GetMatchAvailable(player));
+		printer->PrintAvilable(board.GetBoard(), board.GetSize(), GetAvailableChecker(player));
 		Point tmp = GetPointFromPlayer(player);
 		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), player)) {
 			tmp = GetPointFromPlayerAgain(player);
 		}
-		player = GetOppositeColor(player);
+		player = GetOppsiteChecker(player);
 	}
-}
-
-Checker GameManager::GetOppositeColor(Checker color) {
-	if (color == Black) {
-		return White;
-	}
-	return Black;
 }
 
 Point GameManager::GetPointFromPlayer(Checker color) {
@@ -89,20 +85,4 @@ Point GameManager::GetPointFromPlayerAgain(Checker color) {
 		return white->PointIsntAvialabe();
 	}
 	return Point(-1, -1);
-}
-
-Checker GameManager::GetMatchAvailable(Checker color) {
-	switch (color)
-	{
-	case Black:
-		return AvailableB;
-	case White:
-		return AvailableW;
-	case Nothing:
-	case AvailableB:
-	case AvailableW:
-	case AvailableBoth:
-	default:
-		return color;
-	}
 }

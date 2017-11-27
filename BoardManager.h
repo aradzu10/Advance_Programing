@@ -50,6 +50,5 @@ private:
 	int amountOfBlack, amountOfWhite;
 	Matrix<Checker> board;
 	AvailableFinder* finder;
-
 };
 #endif

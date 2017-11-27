@@ -4,8 +4,6 @@ ID: 315240564
 */
 
 #include "AIPlayer.h"
-#include <iostream>
-#include <string>
 #include <sstream>
 
 using namespace std;
@@ -82,7 +80,6 @@ int AIPlayer::EmulateMyTurnOthers(const BoardManager& bm) {
 	int tmpScore = 0;
 	minScore *= minScore;
 	minScore++;
-	int minRow = -1, minCol = -1;
 	const Matrix<Checker>& b = bm.GetBoard();
 	for (int r = 0; r < bm.GetSize(); r++) {
 		for (int c = 0; c < bm.GetSize(); c++) {
@@ -92,8 +89,6 @@ int AIPlayer::EmulateMyTurnOthers(const BoardManager& bm) {
 				tmpScore = EmulateOpponentTurn(tmpBM);
 				if (tmpScore <= minScore) {
 					minScore = tmpScore;
-					minRow = r;
-					minCol = c;
 				}
 			}
 		}

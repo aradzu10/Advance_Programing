@@ -15,7 +15,7 @@ ID: 315240564
 class GameManager
 {
 public:
-	GameManager(int size_, BoardManager& board_);
+	GameManager(BoardManager& board_);
 	~GameManager();
 	//change default settings - printer, players
 	void SetPrinter(Graphic* printer_);
@@ -23,17 +23,12 @@ public:
 	//play game
 	void StartGame();
 private:
-	//get opposite color - ex. get black return white
-	Checker GetOppositeColor(Checker color);
 	//get point from player
 	Point GetPointFromPlayer(Checker color);
 	//get point from player with error message
 	Point GetPointFromPlayerAgain(Checker color);
-	//
-	Checker GetMatchAvailable(Checker color);
 private:
 	//members
-	int board_size;
 	BoardManager& board;
 	Player* white;
 	Player* black;
