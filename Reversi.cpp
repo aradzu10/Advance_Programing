@@ -21,7 +21,7 @@ void Reversi::ChangeSettings() {
 	int task;
 	cout << "Please choose type of opponent:" << endl;
 	cout << "1 - AI player" << endl;
-	cout << "2 - Both AI player" << endl;
+	cout << "2 - Both AI players" << endl;
 	cout << "3 - Human player" << endl;
 	cin >> task;
 	if (task == 1) {
