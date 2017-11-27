@@ -19,10 +19,9 @@ Reversi::~Reversi() {
 
 void Reversi::ChangeSettings() {
 	int task;
-	cout << "Please choose type of opponent" << endl;
+	cout << "Please choose type of opponent:" << endl;
 	cout << "1 - AI player" << endl;
 	cout << "2 - Human player" << endl;
-	cout << "i made this" << endl;
 	cin >> task;
 	if (task == 1) {
 		Graphic *printer = new ConsolePrinter();
