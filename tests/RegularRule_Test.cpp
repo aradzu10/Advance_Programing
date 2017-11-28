@@ -14,6 +14,7 @@ TEST(REGULAR_RULE, FIND_ALL_AVAILABLE) {
             check[i][j] = Nothing;
         }
     }
+
     board[2][2] = White;
     board[2][3] = Black;
     board[3][2] = Black;
@@ -21,6 +22,7 @@ TEST(REGULAR_RULE, FIND_ALL_AVAILABLE) {
     board[4][1] = White;
     board[4][4] = Black;
     boardManager.Init(board);
+
     check[2][2] = White;
     check[2][3] = Black;
     check[3][2] = Black;
@@ -43,5 +45,6 @@ TEST(REGULAR_RULE, FIND_ALL_AVAILABLE) {
     check[5][5] = AvailableW;
 
     boardManager.FindAllAvailable();
-    EXPECT_TRUE(boardManager.GetBoard() == check);
+
+    EXPECT_TRUE(check == boardManager.GetBoard());
 }
