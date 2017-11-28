@@ -20,3 +20,7 @@ int Point::getCol()
 {
 	return this->c;
 }
+
+bool Point::operator==(Point point) {
+	return (c == point.c) && (r == point.r);
+}
