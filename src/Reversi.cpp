@@ -6,7 +6,7 @@ ID: 315240564
 #include <iostream>
 using namespace std;
 #include "Reversi.h"
-#include "AIPlayer.h"
+#include "AIPlayer_Test.h"
 #include "ConsolePrinter.h"
 #include "ConsolePlayer.h"
 

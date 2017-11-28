@@ -1,6 +1,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../src/AIPlayer.h"
+#include "../src/AIPlayer_Test.h"
 #include "../src/Checker.h"
 #include "../src/BoardManager.h"
 #include "../src/ConsolePrinter.h"
@@ -26,5 +26,6 @@ TEST(AI_PLAYER_TEST, GET_POINT) {
     Point tmp1(2, 0);
     Point tmp2(-1, -1);
     EXPECT_TRUE(tmp1 == point1 && tmp2 == point2);
+    delete printer;
 }
 

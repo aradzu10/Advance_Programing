@@ -3,7 +3,7 @@ Name: Arad Zulti
 ID: 315240564
 */
 
-#include "AIPlayer.h"
+#include "AIPlayer_Test.h"
 #include <sstream>
 
 using namespace std;
