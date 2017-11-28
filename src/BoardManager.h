@@ -30,7 +30,7 @@ public:
 	//get checker and put at place, then turn around which it need
 	bool DoTurn(int row, int colum, Checker to_put);
 	//check if player have available moves
-	bool CheckPlayerAvailable(Checker color) const ;
+	bool CheckPlayerAvailable(Checker color) const;
 	//check if both player have available moves
 	bool CheckIfGameEnded();
 	//return winner player

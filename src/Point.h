@@ -14,7 +14,7 @@ public:
 	//gets
 	int getRow();
 	int getCol();
-	bool operator==(Point point);
+	bool operator==(const Point& point) const;
 private:
 	//members
 	int r;

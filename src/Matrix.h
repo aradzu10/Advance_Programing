@@ -19,6 +19,7 @@ public:
 
 	T* operator[](int i);
 	const T* operator[](int i) const;
+	bool operator==(const Matrix<T>& matrix) const;
 };
 
 template <class T>
@@ -66,4 +67,19 @@ inline const T * Matrix<T>::operator[](int i) const {
 	return matrix[i];
 }
 
+template<class T>
+inline bool Matrix<T>::operator==(const Matrix<T> &m) const {
+
+	if (m.col != col || m.row != row) {
+		return false;
+	}
+	for (int i = 0; i < col; i++) {
+		for (int j = 0; j < row; j++) {
+			if (m[i][j] != matrix[i][j]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
 #endif

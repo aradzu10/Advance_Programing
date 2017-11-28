@@ -21,6 +21,6 @@ int Point::getCol()
 	return this->c;
 }
 
-bool Point::operator==(Point point) {
+bool Point::operator==(const Point& point) const {
 	return (c == point.c) && (r == point.r);
 }

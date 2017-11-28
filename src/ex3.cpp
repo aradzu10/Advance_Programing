@@ -10,4 +10,3 @@ ID: 315240564
 //	reversi.StartGame();
 //	return 0;
 //}
-

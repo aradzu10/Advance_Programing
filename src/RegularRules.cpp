@@ -136,7 +136,7 @@ bool RegularRules::CheckIfAvilable(Matrix<Checker>& board, int board_size, int r
 	}
 
 	found_checker = false;
-	lim = (row < col) ? row : col;
+	lim = (row < col) ? row + 1 : col + 1;
 	for (int i = 1; i < lim; i++) {
 		if (board[row - i][col - i] != checker_to_find) {
 			if (found_checker && board[row - i][col - i] == current_checker) {
@@ -148,7 +148,7 @@ bool RegularRules::CheckIfAvilable(Matrix<Checker>& board, int board_size, int r
 	}
 
 	found_checker = false;
-	lim = (row < (board_size - col)) ? row : (board_size - col);
+	lim = (row + 1 < (board_size - col)) ? row + 1 : (board_size - col);
 	for (int i = 1; i < lim; i++) {
 		if (board[row - i][col + i] != checker_to_find) {
 			if (found_checker && board[row - i][col + i] == current_checker) {
@@ -160,7 +160,7 @@ bool RegularRules::CheckIfAvilable(Matrix<Checker>& board, int board_size, int r
 	}
 
 	found_checker = false;
-	lim = ((board_size - row) < col) ? (board_size - row) : col;
+	lim = ((board_size - row) < col + 1) ? (board_size - row) : col + 1;
 	for (int i = 1; i < lim; i++) {
 		if (board[row + i][col - i] != checker_to_find) {
 			if (found_checker && board[row + i][col - i] == current_checker) {
