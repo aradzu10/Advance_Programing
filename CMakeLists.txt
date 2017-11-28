@@ -12,6 +12,6 @@ set(SOURCE_FILES src/AIPlayer.cpp src/AIPlayer_Test.h src/AvailableFinder.cpp sr
         src/Player.h src/Point.cpp src/Point.h src/RegularRules.cpp src/RegularRules.h src/Reversi.cpp src/Reversi.h)
 
 add_executable(ex3 ${SOURCE_FILES} src/ex3.cpp)
-add_executable(ReversiTests ${SOURCE_FILES} ${TEST_FILES} tests/gtest_main.cpp tests/TryTest.cpp tests/AIPlayer_Test.cpp tests/BoardManager_Test.cpp)
+add_executable(ReversiTests ${SOURCE_FILES} ${TEST_FILES} tests/gtest_main.cpp tests/Temp.cpp tests/AIPlayer_Test.cpp tests/BoardManager_Test.cpp tests/RegularRule_Test.cpp)
 target_link_libraries(ReversiTests gtest gtest_main)
 add_test(ReversiTests ReversiTests)

@@ -15,7 +15,7 @@ BoardManager::BoardManager(int size) : board_size(size), amountOfBlack(0), amoun
 BoardManager::BoardManager(const BoardManager& b) : board_size(b.board_size), finder(NULL) {
 	SetRule(b.finder->GetClone());
 	Init(b.GetBoard());
-	SetCheckerAmount(b.amountOfBlack, b.amountOfWhite);
+//	SetCheckerAmount(b.amountOfBlack, b.amountOfWhite);
 }
 BoardManager::~BoardManager() {
 	if (finder)
@@ -38,10 +38,17 @@ void BoardManager::Init() {//board resize, Init
 	amountOfWhite = 2;
 }
 void BoardManager::Init(const Matrix<Checker>& existBoard) {
+	amountOfWhite = 0;
+	amountOfBlack = 0;
 	board.resize(board_size, board_size);
 	for (int r = 0; r < this->board_size; r++) {
 		for (int c = 0; c < this->board_size; c++) {
 			board[r][c] = existBoard[r][c];
+			if (board[r][c] == Black) {
+				amountOfBlack++;
+			} else if (board[r][c] == White) {
+				amountOfWhite++;
+			}
 		}
 	}
 }
