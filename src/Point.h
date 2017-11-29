@@ -1,7 +1,10 @@
 /*
-Name: Arad Zulti
+ID: 318439981
+Name: Matan Dombelski
 ID: 315240564
+Name: Arad Zulti
 */
+
 
 #ifndef POINT_H_
 #define POINT_H_
