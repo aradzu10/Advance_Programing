@@ -8,6 +8,7 @@
 TEST(AI_PLAYER_TEST, GET_POINT) {
     BoardManager boardManager(4);
     Matrix<Checker> board(4, 4);
+    Graphic* printer = new ConsolePrinter();
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             board[i][j] = Nothing;
@@ -18,7 +19,6 @@ TEST(AI_PLAYER_TEST, GET_POINT) {
     board[1][0] = Black;
     board[2][0] = AvailableW;
     boardManager.Init(board);
-    Graphic* printer = new ConsolePrinter();
     AIPlayer playerW(White, boardManager, printer);
     AIPlayer playerB(Black, boardManager, printer);
     Point point1 = playerW.GetPointFromPlayer();

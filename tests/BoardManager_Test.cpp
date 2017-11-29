@@ -23,7 +23,7 @@ TEST(BOARD_MANAGER_TEST, DO_TURN) {
     check[2][0] = White;
     check[3][0] = White;
     boardManager.DoTurn(3, 0, White);
-    EXPECT_TRUE(check == boardManager.GetBoard());
+    EXPECT_EQ(check, boardManager.GetBoard());
 
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -41,7 +41,7 @@ TEST(BOARD_MANAGER_TEST, DO_TURN) {
     check[2][2] = White;
     check[3][3] = White;
     boardManager.DoTurn(3, 3, White);
-    EXPECT_TRUE(check == boardManager.GetBoard());
+    EXPECT_EQ(check, boardManager.GetBoard());
 }
 
 TEST(BOARD_MANAGER_TEST, PLAYER_HAS_AVAILABLE) {
@@ -92,11 +92,11 @@ TEST(BOARD_MANAGER_TEST, CHECK_WINNER) {
     board[1][0] = Black;
     board[2][0] = Black;
     boardManager.Init(board);
-    EXPECT_TRUE(boardManager.ReturnWinner() == Black);
+    EXPECT_EQ(boardManager.ReturnWinner(), Black);
     board[3][0] = White;
     boardManager.Init(board);
-    EXPECT_TRUE(boardManager.ReturnWinner() == Nothing);
+    EXPECT_EQ(boardManager.ReturnWinner(), Nothing);
     board[3][1] = White;
     boardManager.Init(board);
-    EXPECT_TRUE(boardManager.ReturnWinner() == White);
+    EXPECT_EQ(boardManager.ReturnWinner(), White);
 }

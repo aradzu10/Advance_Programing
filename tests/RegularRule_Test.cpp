@@ -7,9 +7,8 @@ TEST(REGULAR_RULE, FIND_ALL_AVAILABLE) {
     BoardManager boardManager(6);
     Matrix<Checker> board(6, 6);
     Matrix<Checker> check(6, 6);
-
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 6; j++) {
             board[i][j] = Nothing;
             check[i][j] = Nothing;
         }
@@ -45,6 +44,5 @@ TEST(REGULAR_RULE, FIND_ALL_AVAILABLE) {
     check[5][5] = AvailableW;
 
     boardManager.FindAllAvailable();
-
-    EXPECT_TRUE(check == boardManager.GetBoard());
+    EXPECT_EQ(check, boardManager.GetBoard());
 }
