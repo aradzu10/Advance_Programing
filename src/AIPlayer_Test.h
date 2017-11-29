@@ -1,3 +1,10 @@
+/*
+ID: 318439981
+Name: Matan Dombelski
+ID: 315240564
+Name: Arad Zulti
+*/
+
 #ifndef AI_PLAYER_
 #define AI_PLAYER_
 
