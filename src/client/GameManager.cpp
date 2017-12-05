@@ -69,6 +69,7 @@ void GameManager::StartGame() {
 		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), currentPlayer->GetColor())) {
 			tmp = currentPlayer->PointIsntAvialabe();
 		}
+		currentPlayer->SuccessfulTurn();
 		tmpP = currentPlayer;
 		currentPlayer = nextPlayer;
 		nextPlayer = tmpP;
