@@ -16,7 +16,7 @@ void Server::start() {
     int player1 = ConnectToPlayer();
     int player2 = ConnectToPlayer();
     InitiatePlayers(player1, player2);
-    StartGame(player1, player2);
+    CommunicationStream(player1, player2);
 }
 
 void Server::stop() {
@@ -60,7 +60,7 @@ void Server::InitiatePlayers(int player1, int player2) {
     }
 }
 
-void Server::StartGame(int player1, int player2) {
+void Server::CommunicationStream(int player1, int player2) {
     int sender = player1;
     int receiver = player2;
     int tmp;
@@ -69,6 +69,8 @@ void Server::StartGame(int player1, int player2) {
         sender = receiver;
         receiver = tmp;
     }
+    close(player1);
+    close(player2);
 }
 
 bool Server::TransferData(int sender, int receiver) {

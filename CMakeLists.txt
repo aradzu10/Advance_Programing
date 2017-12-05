@@ -10,7 +10,9 @@ set(SOURCE_FILES src/AIPlayer.cpp src/AIPlayer_Test.h src/AvailableFinder.cpp sr
         src/BoardManager.h src/Checker.cpp src/Checker.h src/ConsolePlayer.cpp src/ConsolePlayer.h src/ConsolePrinter.cpp
         src/ConsolePrinter.h src/ex3.cpp src/GameManager.cpp src/GameManager.h src/Graphic.cpp src/Graphic.h src/Matrix.h
         src/Player.cpp src/Player.h src/Point.cpp src/Point.h src/RegularRules.cpp src/RegularRules.h src/Reversi.cpp
-        src/Reversi.h server/Server.cpp server/Server.h)
+        src/Reversi.h)
+
+set(SOURCE_FILES server/Server.cpp server/Server.h)
 
 set(TEST_FILES tests/Temp.cpp tests/AIPlayer_Test.cpp tests/BoardManager_Test.cpp tests/RegularRule_Test.cpp
         tests/ConsolePrinter_Test.cpp)
