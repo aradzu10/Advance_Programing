@@ -40,51 +40,37 @@ GameManager::~GameManager() {
 }
 
 void GameManager::StartGame() {
-	Checker player = White;
+	Player *currentPlayer = white;
+	Player *nextPlayer = black;
+	Player *tmpP;
 	while (true) {
 		board.FindAllAvailable();
 		printer->PrintBoard(board.GetBoard(), board.GetSize());
-		printer->PrintTurnOf(player);
-		if (!board.CheckPlayerAvailable(player)) {
-			printer->PrintMessage("You don't have any available moves...");
+		currentPlayer->MyTurn();
+		if (!board.CheckPlayerAvailable(currentPlayer->GetColor())) {
+			currentPlayer->NoMove();
 			if (board.CheckIfGameEnded()) {
-				player = board.ReturnWinner();
-				if (player == Nothing) {
+				currentPlayer->GameEnded();
+				if (board.ReturnWinner() == Nothing) {
 					printer->PrintMessage("It's a tie!");
 				} else {
-					printer->PrintWinnerMessage(player);
+					printer->PrintWinnerMessage(currentPlayer->GetColor());
 				}
 				break;
 			}
 			printer->PrintMessage("Turn go to next player");
-			player = GetOppsiteChecker(player);
+			tmpP = currentPlayer;
+			currentPlayer = nextPlayer;
+			nextPlayer = tmpP;
 			continue;
 		}
-		printer->PrintAvilable(board.GetBoard(), board.GetSize(), GetAvailableChecker(player));
-		Point tmp = GetPointFromPlayer(player);
-		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), player)) {
-			tmp = GetPointFromPlayerAgain(player);
+		printer->PrintAvilable(board.GetBoard(), board.GetSize(), GetAvailableChecker(currentPlayer->GetColor()));
+		Point tmp = currentPlayer->GetPointFromPlayer();
+		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), currentPlayer->GetColor())) {
+			tmp = currentPlayer->PointIsntAvialabe();
 		}
-		player = GetOppsiteChecker(player);
+		tmpP = currentPlayer;
+		currentPlayer = nextPlayer;
+		nextPlayer = tmpP;
 	}
-}
-
-Point GameManager::GetPointFromPlayer(Checker color) {
-	if (color == Black) {
-		return black->GetPointFromPlayer();
-	}
-	if (color == White) {
-		return white->GetPointFromPlayer();
-	}
-	return Point(-1, -1);
-}
-
-Point GameManager::GetPointFromPlayerAgain(Checker color) {
-	if (color == Black) {
-		return black->PointIsntAvialabe();
-	}
-	if (color == White) {
-		return white->PointIsntAvialabe();
-	}
-	return Point(-1, -1);
 }

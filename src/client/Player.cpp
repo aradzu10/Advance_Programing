@@ -13,10 +13,28 @@ Player::Player(Checker color, const BoardManager& board_, Graphic* graphic_) : p
 Player::~Player() {
 }
 
+Checker Player::GetColor() {
+	return player_color;
+}
+
 Point Player::GetPointFromPlayer() {
 	return Point(-1, -1);
 }
 
 Point Player::PointIsntAvialabe() {
 	return Point(-1, -1);
+}
+
+void Player::MyTurn() {
+	graphic->PrintTurnOf(player_color);
+}
+
+void Player::SuccessfulTurn() {
+}
+
+void Player::NoMove() {
+	graphic->PrintMessage("No available moves");
+}
+
+void Player::GameEnded() {
 }

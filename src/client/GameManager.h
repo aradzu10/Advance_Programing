@@ -24,11 +24,7 @@ public:
 	void SetPlayers(Player* white_, Player* black_);
 	//play game
 	void StartGame();
-private:
-	//get point from player
-	Point GetPointFromPlayer(Checker color);
-	//get point from player with error message
-	Point GetPointFromPlayerAgain(Checker color);
+
 private:
 	//members
 	BoardManager& board;

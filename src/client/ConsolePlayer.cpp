@@ -32,7 +32,7 @@ Point ConsolePlayer::GetPointFromPlayer() {
 Point ConsolePlayer::PointIsntAvialabe() {
 	int row, col;
 	graphic->PrintMessage("You enterd incorrect location...");
-	graphic->PrintMessage("Please enter new location to put disc (format: \"row colum\"): ");
+	graphic->PrintMessage("Please enter new location to put disc (format: \"row column\"): ");
 	cin >> row;
 	cin >> col; 
 	if (cin.fail()) {

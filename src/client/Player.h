@@ -18,9 +18,15 @@ class Player
 public:
 	Player(Checker color, const BoardManager& board_, Graphic* graphic_);
 	virtual ~Player();
+	Checker GetColor();
 	//get point from player - return false point, childs will change it
 	virtual Point GetPointFromPlayer();
 	virtual Point PointIsntAvialabe();
+	virtual void MyTurn();
+	virtual void SuccessfulTurn();
+	virtual void NoMove();
+	virtual void GameEnded();
+
 protected:
 	//members
 	Checker player_color;
