@@ -7,10 +7,10 @@ Name: Arad Zulti
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../src/AIPlayer_Test.h"
-#include "../src/Checker.h"
-#include "../src/BoardManager.h"
-#include "../src/ConsolePrinter.h"
+#include "../src/client/AIPlayer_Test.h"
+#include "../src/client/Checker.h"
+#include "../src/client/BoardManager.h"
+#include "../src/client/ConsolePrinter.h"
 
 TEST(AI_PLAYER_TEST, GET_POINT) {
     BoardManager boardManager(4);

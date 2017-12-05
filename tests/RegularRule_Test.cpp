@@ -7,8 +7,8 @@ Name: Arad Zulti
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../src/BoardManager.h"
-#include "../src/Matrix.h"
+#include "../src/client/BoardManager.h"
+#include "../src/client/Matrix.h"
 
 TEST(REGULAR_RULE, FIND_ALL_AVAILABLE) {
     BoardManager boardManager(6);
