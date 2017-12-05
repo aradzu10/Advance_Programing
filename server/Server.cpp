@@ -6,6 +6,7 @@
 #include <string.h>
 
 #define MAX_CONNECTIONS 2
+#define MAX_SIZE_OF_DATA 1024
 
 Server::Server(int port_) : port(port_), serverSocket(0) {
 }
@@ -72,7 +73,16 @@ void Server::StartGame(int player1, int player2) {
 }
 
 bool Server::TransferData(int sender, int receiver) {
-    int check
+    char buffer[MAX_SIZE_OF_DATA] = "\0";
+    int check = read(sender, buffer, sizeof(buffer));
+    if (check <= 0) {
+        false;
+    }
+    check = write(receiver, buffer, sizeof(buffer));
+    if (check <= 0) {
+        false;
+    }
+    return true;
 }
 
 void Server::CheckIfEndOfSession() {
