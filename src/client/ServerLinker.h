@@ -5,7 +5,9 @@
 class ServerLinker {
 public:
     ServerLinker(const char *serverIP, int serverPort);
-    void connectToServer();
+    void ConnectToServer();
+    char* ReadDataFromServer();
+    void WriteDataToServer(char* buffer, int size);
 private:
     const char* serverIP;
     int serverPort;
