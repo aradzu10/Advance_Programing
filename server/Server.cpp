@@ -1,5 +1,4 @@
 #include "Server.h"
-#include "../src/Checker.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
@@ -21,7 +20,7 @@ void Server::start() {
 }
 
 void Server::stop() {
-
+    close(serverSocket);
 }
 
 void Server::InitiateServer() {
@@ -50,8 +49,8 @@ int Server::ConnectToPlayer() {
 }
 
 void Server::InitiatePlayers(int player1, int player2) {
-    Checker white = White;
-    Checker black = Black;
+    int white = 1;
+    int black = 2;
     if (write(player1, &white, sizeof(white)) < 0) {
         throw "Error on Initiate player1";
     }
@@ -83,8 +82,4 @@ bool Server::TransferData(int sender, int receiver) {
         false;
     }
     return true;
-}
-
-void Server::CheckIfEndOfSession() {
-
 }

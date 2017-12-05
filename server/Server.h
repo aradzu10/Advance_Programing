@@ -14,6 +14,5 @@ private:
     void InitiatePlayers(int player1, int player2);
     void StartGame(int player1, int player2);
     bool TransferData(int sender, int receiver);
-    void CheckIfEndOfSession();
 };
 #endif //SERVER_H
