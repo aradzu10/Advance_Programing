@@ -10,9 +10,10 @@ private:
     int port;
     int serverSocket;
     void InitiateServer();
-    void ConnectToPlayers();
-    void StartGame();
-    void TransferPoint(int sender, int receiver);
+    int ConnectToPlayer();
+    void InitiatePlayers(int player1, int player2);
+    void StartGame(int player1, int player2);
+    bool TransferData(int sender, int receiver);
     void CheckIfEndOfSession();
 };
 #endif //SERVER_H
