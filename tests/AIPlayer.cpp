@@ -7,7 +7,7 @@ Name: Arad Zulti
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../src/client/AIPlayer_Test.h"
+#include "../src/client/AIPlayer.h"
 #include "../src/client/Checker.h"
 #include "../src/client/BoardManager.h"
 #include "../src/client/ConsolePrinter.h"

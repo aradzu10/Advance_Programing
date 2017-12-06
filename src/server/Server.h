@@ -5,7 +5,6 @@ class Server {
 public:
     Server(int port_);
     void start();
-    void tryServer();
     void stop();
 private:
     int port;

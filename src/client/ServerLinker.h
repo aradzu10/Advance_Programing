@@ -7,7 +7,7 @@ public:
     ServerLinker(const char *serverIP, int serverPort);
     void ConnectToServer();
     char* ReadDataFromServer();
-    void WriteDataToServer(char* buffer, int size);
+    void WriteDataToServer(const char* buffer, int size);
 private:
     const char* serverIP;
     int serverPort;

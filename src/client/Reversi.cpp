@@ -8,9 +8,10 @@ Name: Arad Zulti
 #include <iostream>
 using namespace std;
 #include "Reversi.h"
-#include "AIPlayer_Test.h"
+#include "AIPlayer.h"
 #include "ConsolePrinter.h"
 #include "HumanPlayer.h"
+#include "ServerLinker.h"
 
 Reversi::Reversi(int size) : board_size(size), board(board_size), game(board) {
 	ChangeSettings();
@@ -25,15 +26,28 @@ void Reversi::ChangeSettings() {
 	cout << "1 - AI player" << endl;
 	cout << "2 - Both AI players" << endl;
 	cout << "3 - Human player" << endl;
+	cout << "4 - Online player" << endl;
 	cin >> task;
-	if (task == 1) {
-		Graphic *printer = new ConsolePrinter();
-		game.SetPrinter(printer);
-		game.SetPlayers(new ConsolePlayer(White, board, printer), new AIPlayer(Black, board, printer));
-	} else if (task == 2) {
-		Graphic *printer = new ConsolePrinter();
-		game.SetPrinter(printer);
-		game.SetPlayers(new AIPlayer(White, board, printer), new AIPlayer(Black, board, printer));
+
+	Graphic *printer;
+	switch (task) {
+		case 1:
+			printer = new ConsolePrinter();
+			game.SetPrinter(printer);
+			game.SetPlayers(new ConsolePlayer(White, board, printer), new AIPlayer(Black, board, printer));
+			break;
+		case 2:
+			printer = new ConsolePrinter();
+			game.SetPrinter(printer);
+			game.SetPlayers(new AIPlayer(White, board, printer), new AIPlayer(Black, board, printer));
+			break;
+		case 4:
+			printer = new ConsolePrinter();
+			game.SetPrinter(printer);
+//			ServerLinker link()
+			break;
+		default:
+			break;
 	}
 }
 

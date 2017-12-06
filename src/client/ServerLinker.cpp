@@ -38,18 +38,16 @@ void ServerLinker::ConnectToServer() {
 }
 
 char *ServerLinker::ReadDataFromServer() {
-    char *buffer = new char[MAX_SIZE_OF_DATA];
+    char buffer[MAX_SIZE_OF_DATA];
     memset(buffer, 0, MAX_SIZE_OF_DATA);
     int check = read(clientSocket, buffer, MAX_SIZE_OF_DATA);
-    std::cout << buffer << " 9" << std::endl;
     if (check < 0) {
         throw "Error reading data";
     }
     return buffer;
 }
 
-void ServerLinker::WriteDataToServer(char *buffer, int size) {
-    std::cout << buffer << " 10" << std::endl;
+void ServerLinker::WriteDataToServer(const char *buffer, int size) {
     int check = send(clientSocket, buffer, size, 0);
     if (check < 0) {
         throw "Error reading data";

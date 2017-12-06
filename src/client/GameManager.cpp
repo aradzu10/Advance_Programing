@@ -67,7 +67,7 @@ void GameManager::StartGame() {
 		printer->PrintAvilable(board.GetBoard(), board.GetSize(), GetAvailableChecker(currentPlayer->GetColor()));
 		Point tmp = currentPlayer->GetPointFromPlayer();
 		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), currentPlayer->GetColor())) {
-			tmp = currentPlayer->PointIsntAvialabe();
+			tmp = currentPlayer->PointNotAvailable();
 		}
 		currentPlayer->SuccessfulTurn();
 		tmpP = currentPlayer;

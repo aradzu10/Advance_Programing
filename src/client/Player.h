@@ -21,9 +21,9 @@ public:
 	Checker GetColor();
 	//get point from player - return false point, childs will change it
 	virtual Point GetPointFromPlayer();
-	virtual Point PointIsntAvialabe();
+	virtual Point PointNotAvailable();
 	virtual void MyTurn();
-	virtual void SuccessfulTurn();
+	virtual void SuccessfulTurn(Point point);
 	virtual void NoMove();
 	virtual void GameEnded();
 

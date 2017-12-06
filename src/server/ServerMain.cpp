@@ -2,7 +2,7 @@
 
 int main() {
     Server newServer(8981); // change - read port from file
-    newServer.tryServer();
+    newServer.start();
     newServer.stop();
     return 0;
 }

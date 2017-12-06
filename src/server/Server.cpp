@@ -86,7 +86,7 @@ void Server::CommunicationStream(int player1, int player2) {
 }
 
 bool Server::TransferData(int sender, int receiver) {
-    char* buffer = new char[MAX_SIZE_OF_DATA];
+    char* buffer[MAX_SIZE_OF_DATA];
     memset(buffer, 0, MAX_SIZE_OF_DATA);
     int check = read(sender, buffer, MAX_SIZE_OF_DATA);
     if (check <= 0) {

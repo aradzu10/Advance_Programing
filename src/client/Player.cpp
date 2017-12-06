@@ -21,7 +21,7 @@ Point Player::GetPointFromPlayer() {
 	return Point(-1, -1);
 }
 
-Point Player::PointIsntAvialabe() {
+Point Player::PointNotAvailable() {
 	return Point(-1, -1);
 }
 
@@ -29,7 +29,7 @@ void Player::MyTurn() {
 	graphic->PrintTurnOf(player_color);
 }
 
-void Player::SuccessfulTurn() {
+void Player::SuccessfulTurn(Point point) {
 }
 
 void Player::NoMove() {

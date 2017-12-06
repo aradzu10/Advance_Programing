@@ -19,6 +19,6 @@ public:
 	//get point from player
 	virtual Point GetPointFromPlayer();
 	//get point from player, with an error message
-	virtual Point PointIsntAvialabe();
+	virtual Point PointNotAvailable();
 };
 #endif

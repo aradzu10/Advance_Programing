@@ -5,7 +5,7 @@ ID: 315240564
 Name: Arad Zulti
 */
 
-#include "AIPlayer_Test.h"
+#include "AIPlayer.h"
 #include <sstream>
 
 using namespace std;
@@ -25,7 +25,7 @@ Point AIPlayer::GetPointFromPlayer() {
 	return point;
 }
 
-Point AIPlayer::PointIsntAvialabe() {
+Point AIPlayer::PointNotAvailable() {
 	return GetPointFromPlayer();
 }
 
