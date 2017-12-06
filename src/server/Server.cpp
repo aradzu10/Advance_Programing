@@ -3,50 +3,37 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
+#include <cstring>
+#include <iostream>
 
-#define MAX_CONNECTIONS 2
-#define MAX_SIZE_OF_DATA 1024
+#define MAX_CONNECTIONS 10
+#define MAX_SIZE_OF_DATA 81920
 
 Server::Server(int port_) : port(port_), serverSocket(0) {
 }
 
-void Server::tryServer() {
-    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (serverSocket < 0) {
-        throw "Error opening socket";
-    }
-    struct sockaddr_in serverAddress;
-    memset((void *)&serverAddress, 0, sizeof(serverAddress));
-    serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = INADDR_ANY;
-    serverAddress.sin_port = htons(port);
-    if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) {
-        throw "Error on binding";
-    }
-    listen(serverSocket, MAX_CONNECTIONS);
-    struct sockaddr_in clientAddress1;
-    socklen_t clientAddressLen1;
-    int clientSocket1 = accept(serverSocket, (struct sockaddr*)&clientAddress1, &clientAddressLen1);
-    if (clientSocket1 < 0) {
-        throw "Error on accept";
-    }
-    struct sockaddr_in clientAddress2;
-    socklen_t clientAddressLen2;
-    int clientSocket2 = accept(serverSocket, (struct sockaddr*)&clientAddress2, &clientAddressLen2);
-    if (clientSocket2 < 0) {
-        throw "Error on accept";
-    }
-    InitiatePlayers(clientSocket1, clientSocket2);
-    TransferData(clientSocket1, clientSocket2);
-}
-
 void Server::start() {
     InitiateServer();
-    listen(serverSocket, MAX_CONNECTIONS);
-    int player1 = ConnectToPlayer();
-    int player2 = ConnectToPlayer();
-    InitiatePlayers(player1, player2);
-    CommunicationStream(player1, player2);
+
+    struct sockaddr_in clientAddress1;
+    struct sockaddr_in clientAddress2;
+    socklen_t clientAddressLen1 = 0;
+    socklen_t clientAddressLen2 = 0;
+    while (true) {
+        int clientSocket1 = accept(serverSocket, (struct sockaddr *) &clientAddress1, &clientAddressLen1);
+        if (clientSocket1 < 0) {
+            close(serverSocket);
+            throw "Error on accept";
+        }
+        int clientSocket2 = accept(serverSocket, (struct sockaddr *) &clientAddress2, &clientAddressLen2);
+        if (clientSocket2 < 0) {
+            close(serverSocket);
+            throw "Error on accept";
+        }
+
+        InitiatePlayers(clientSocket1, clientSocket2);
+        CommunicationStream(clientSocket1, clientSocket2);
+    }
 }
 
 void Server::stop() {
@@ -64,30 +51,25 @@ void Server::InitiateServer() {
     serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(port);
     if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) {
+        close(serverSocket);
         throw "Error on binding";
     }
-}
-
-int Server::ConnectToPlayer() {
-    struct sockaddr_in clientAddress;
-    socklen_t clientAddressLen;
-    int clientSocket = accept(serverSocket, (struct sockaddr*)&clientAddress, &clientAddressLen);
-    if (clientSocket < 0) {
-        throw "Error on accept";
+    if (listen(serverSocket, MAX_CONNECTIONS) < 0) {
+        close(serverSocket);
+        throw "Error on listening";
     }
-    return clientSocket;
 }
 
 void Server::InitiatePlayers(int player1, int player2) {
-    char white = '1';
-    char black = '2';
-    if (write(player1, &white, sizeof(white)) < 0) {
+    char *black = "1";
+    char *white = "2";
+    if (send(player1, black, sizeof(black), 0) < 0) {
+        throw "Error on Initiate player2";
+    }
+    if (send(player2, white, sizeof(white), 0) < 0) {
         throw "Error on Initiate player1";
     }
 
-    if (write(player2, &black, sizeof(black)) < 0) {
-        throw "Error on Initiate player2";
-    }
 }
 
 void Server::CommunicationStream(int player1, int player2) {
@@ -104,12 +86,14 @@ void Server::CommunicationStream(int player1, int player2) {
 }
 
 bool Server::TransferData(int sender, int receiver) {
-    char buffer[MAX_SIZE_OF_DATA] = "\0";
-    int check = read(sender, buffer, sizeof(buffer));
+    char* buffer = new char[MAX_SIZE_OF_DATA];
+    memset(buffer, 0, MAX_SIZE_OF_DATA);
+    int check = read(sender, buffer, MAX_SIZE_OF_DATA);
     if (check <= 0) {
         false;
     }
-    check = write(receiver, buffer, sizeof(buffer));
+    std::cout << buffer << std::endl;
+    check = send(receiver, buffer, MAX_SIZE_OF_DATA, 0);
     if (check <= 0) {
         false;
     }

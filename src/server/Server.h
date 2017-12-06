@@ -11,7 +11,6 @@ private:
     int port;
     int serverSocket;
     void InitiateServer();
-    int ConnectToPlayer();
     void InitiatePlayers(int player1, int player2);
     void CommunicationStream(int player1, int player2);
     bool TransferData(int sender, int receiver);

@@ -5,8 +5,9 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <string.h>
+#include <iostream>
 
-#define MAX_SIZE_OF_DATA 1024
+#define MAX_SIZE_OF_DATA 81920
 
 ServerLinker::ServerLinker(const char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
@@ -37,8 +38,10 @@ void ServerLinker::ConnectToServer() {
 }
 
 char *ServerLinker::ReadDataFromServer() {
-    char *buffer = new char(MAX_SIZE_OF_DATA);
-    int check = read(clientSocket, buffer, sizeof(buffer));
+    char *buffer = new char[MAX_SIZE_OF_DATA];
+    memset(buffer, 0, MAX_SIZE_OF_DATA);
+    int check = read(clientSocket, buffer, MAX_SIZE_OF_DATA);
+    std::cout << buffer << " 9" << std::endl;
     if (check < 0) {
         throw "Error reading data";
     }
@@ -46,7 +49,8 @@ char *ServerLinker::ReadDataFromServer() {
 }
 
 void ServerLinker::WriteDataToServer(char *buffer, int size) {
-    int check = write(clientSocket, buffer, size);
+    std::cout << buffer << " 10" << std::endl;
+    int check = send(clientSocket, buffer, size, 0);
     if (check < 0) {
         throw "Error reading data";
     }
