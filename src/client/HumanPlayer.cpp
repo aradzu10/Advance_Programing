@@ -10,12 +10,12 @@ Name: Arad Zulti
 
 using namespace std;
 
-ConsolePlayer::ConsolePlayer(Checker color, const BoardManager& board_, Graphic* graphic_) :
+HumanPlayer::HumanPlayer(Checker color, const BoardManager& board_, Graphic* graphic_) :
 		Player(color, board_, graphic_) {}
 
-ConsolePlayer::~ConsolePlayer() {}
+HumanPlayer::~HumanPlayer() {}
 
-Point ConsolePlayer::GetPointFromPlayer() {
+Point HumanPlayer::GetPointFromPlayer() {
 	int row, col;
 	graphic->PrintMessage("Please enter location to put disc (format: \"row colum\"): ");
 	cin >> row;
@@ -28,7 +28,7 @@ Point ConsolePlayer::GetPointFromPlayer() {
 	return Point(row - 1, col - 1);
 }
 
-Point ConsolePlayer::PointNotAvailable() {
+Point HumanPlayer::PointNotAvailable() {
 	int row, col;
 	graphic->PrintMessage("You enterd incorrect location...");
 	graphic->PrintMessage("Please enter new location to put disc (format: \"row column\"): ");

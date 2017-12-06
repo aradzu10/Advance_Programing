@@ -11,8 +11,8 @@ Name: Arad Zulti
 
 GameManager::GameManager(BoardManager& board_) : board(board_) {
 	printer = new ConsolePrinter();
-	white = new ConsolePlayer(White, board, printer);
-	black = new ConsolePlayer(Black, board, printer);
+	white = new HumanPlayer(White, board, printer);
+	black = new HumanPlayer(Black, board, printer);
 }
 
 void GameManager::SetPrinter(Graphic* printer_) {

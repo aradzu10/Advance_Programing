@@ -7,7 +7,11 @@ Name: Arad Zulti
 
 #include "Player.h"
 
-Player::Player(Checker color, const BoardManager& board_, Graphic* graphic_) : player_color(color), board(board_), graphic(graphic_) {
+Player::Player() : board(0) {
+}
+
+Player::Player(Checker color, const BoardManager& board_, Graphic* graphic_) :
+		player_color(color), board(board_), graphic(graphic_) {
 }
 
 Player::~Player() {

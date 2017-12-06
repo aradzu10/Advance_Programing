@@ -6,12 +6,16 @@ Name: Arad Zulti
 */
 
 #include <iostream>
+#include <cstring>
+
 using namespace std;
 #include "Reversi.h"
 #include "AIPlayer.h"
 #include "ConsolePrinter.h"
 #include "HumanPlayer.h"
 #include "ServerLinker.h"
+#include "RemotePlayerSender.h"
+#include "RemotePlayerReciver.h"
 
 Reversi::Reversi(int size) : board_size(size), board(board_size), game(board) {
 	ChangeSettings();
@@ -34,7 +38,7 @@ void Reversi::ChangeSettings() {
 		case 1:
 			printer = new ConsolePrinter();
 			game.SetPrinter(printer);
-			game.SetPlayers(new ConsolePlayer(White, board, printer), new AIPlayer(Black, board, printer));
+			game.SetPlayers(new HumanPlayer(White, board, printer), new AIPlayer(Black, board, printer));
 			break;
 		case 2:
 			printer = new ConsolePrinter();
@@ -44,8 +48,19 @@ void Reversi::ChangeSettings() {
 		case 4:
 			printer = new ConsolePrinter();
 			game.SetPrinter(printer);
-//			ServerLinker link()
-			break;
+			ServerLinker link;
+            link.ConnectToServer();
+            Checker myColor, opponentColor;
+            if(!strcmp(link.ReadDataFromServer(), "1")) {
+                myColor = Black;
+                opponentColor = White;
+            } else {
+                myColor = White;
+                opponentColor = Black;
+            }
+            game.SetPlayers(new RemotePlayerSender(link, new HumanPlayer(myColor, board, printer)),
+                            new RemotePlayerReciver(opponentColor, board, printer, link));
+            break;
 		default:
 			break;
 	}

@@ -4,6 +4,7 @@
 
 class ServerLinker {
 public:
+    ServerLinker();
     ServerLinker(const char *serverIP, int serverPort);
     void ConnectToServer();
     char* ReadDataFromServer();

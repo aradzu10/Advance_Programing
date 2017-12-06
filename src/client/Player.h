@@ -16,9 +16,10 @@ Name: Arad Zulti
 class Player
 {
 public:
+	Player();
 	Player(Checker color, const BoardManager& board_, Graphic* graphic_);
 	virtual ~Player();
-	Checker GetColor();
+	virtual Checker GetColor();
 	//get point from player - return false point, childs will change it
 	virtual Point GetPointFromPlayer();
 	virtual Point PointNotAvailable();

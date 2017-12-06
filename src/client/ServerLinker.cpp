@@ -4,10 +4,16 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <unistd.h>
-#include <string.h>
-#include <iostream>
+#include <cstring>
+#include "ConnectionSettings.h"
 
 #define MAX_SIZE_OF_DATA 81920
+
+ServerLinker::ServerLinker() {
+    ConnectionSettings settings;
+    settings.Setup();
+    ServerLinker(settings.GetIPaddress().c_str(), settings.GetPort());
+}
 
 ServerLinker::ServerLinker(const char *serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}

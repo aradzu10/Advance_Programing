@@ -8,16 +8,23 @@ Name: Arad Zulti
 #ifndef CONNECTION_SETTINGS_
 #define CONNECTION_SETTINGS_
 
+#include <string>
+
 class ConnectionSettings {
 public:
-    
+    ConnectionSettings();
+    ConnectionSettings(char *file);
+    ~ConnectionSettings();
+    void Setup();
+    const std::string& GetIPaddress() const;
+    int GetPort() const;
 
 private:
-    void ReadFromFile();
-    void WriteToFile();
+    int ReadFromFile();
 
 private:
-    const char* IPaddress;
+    char* fileAddress;
+    std::string IPaddress;
     int port;
 };
 

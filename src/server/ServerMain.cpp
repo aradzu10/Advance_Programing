@@ -1,7 +1,10 @@
 #include "Server.h"
+#include "../client/ConnectionSettings.h"
 
 int main() {
-    Server newServer(8981); // change - read port from file
+    ConnectionSettings settings;
+    settings.Setup();
+    Server newServer(settings.GetPort());
     newServer.start();
     newServer.stop();
     return 0;

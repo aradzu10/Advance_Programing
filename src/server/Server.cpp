@@ -15,11 +15,11 @@ Server::Server(int port_) : port(port_), serverSocket(0) {
 void Server::start() {
     InitiateServer();
 
-    struct sockaddr_in clientAddress1;
-    struct sockaddr_in clientAddress2;
-    socklen_t clientAddressLen1 = 0;
-    socklen_t clientAddressLen2 = 0;
     while (true) {
+        struct sockaddr_in clientAddress1;
+        struct sockaddr_in clientAddress2;
+        socklen_t clientAddressLen1 = 0;
+        socklen_t clientAddressLen2 = 0;
         int clientSocket1 = accept(serverSocket, (struct sockaddr *) &clientAddress1, &clientAddressLen1);
         if (clientSocket1 < 0) {
             close(serverSocket);
