@@ -10,6 +10,36 @@
 Server::Server(int port_) : port(port_), serverSocket(0) {
 }
 
+void Server::tryServer() {
+    serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (serverSocket < 0) {
+        throw "Error opening socket";
+    }
+    struct sockaddr_in serverAddress;
+    memset((void *)&serverAddress, 0, sizeof(serverAddress));
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_addr.s_addr = INADDR_ANY;
+    serverAddress.sin_port = htons(port);
+    if (bind(serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0) {
+        throw "Error on binding";
+    }
+    listen(serverSocket, MAX_CONNECTIONS);
+    struct sockaddr_in clientAddress1;
+    socklen_t clientAddressLen1;
+    int clientSocket1 = accept(serverSocket, (struct sockaddr*)&clientAddress1, &clientAddressLen1);
+    if (clientSocket1 < 0) {
+        throw "Error on accept";
+    }
+    struct sockaddr_in clientAddress2;
+    socklen_t clientAddressLen2;
+    int clientSocket2 = accept(serverSocket, (struct sockaddr*)&clientAddress2, &clientAddressLen2);
+    if (clientSocket2 < 0) {
+        throw "Error on accept";
+    }
+    InitiatePlayers(clientSocket1, clientSocket2);
+    TransferData(clientSocket1, clientSocket2);
+}
+
 void Server::start() {
     InitiateServer();
     listen(serverSocket, MAX_CONNECTIONS);
@@ -49,8 +79,8 @@ int Server::ConnectToPlayer() {
 }
 
 void Server::InitiatePlayers(int player1, int player2) {
-    int white = 1;
-    int black = 2;
+    char white = '1';
+    char black = '2';
     if (write(player1, &white, sizeof(white)) < 0) {
         throw "Error on Initiate player1";
     }

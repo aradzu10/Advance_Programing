@@ -10,7 +10,7 @@ using namespace std;
 #include "Reversi.h"
 #include "AIPlayer_Test.h"
 #include "ConsolePrinter.h"
-#include "ConsolePlayer.h"
+#include "HumanPlayer.h"
 
 Reversi::Reversi(int size) : board_size(size), board(board_size), game(board) {
 	ChangeSettings();

@@ -5,7 +5,7 @@ ID: 315240564
 Name: Arad Zulti
 */
 
-#include "ConsolePlayer.h"
+#include "HumanPlayer.h"
 #include <iostream>
 
 using namespace std;

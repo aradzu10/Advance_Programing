@@ -37,7 +37,7 @@ void ServerLinker::ConnectToServer() {
 }
 
 char *ServerLinker::ReadDataFromServer() {
-    char buffer[MAX_SIZE_OF_DATA];
+    char *buffer = new char(MAX_SIZE_OF_DATA);
     int check = read(clientSocket, buffer, sizeof(buffer));
     if (check < 0) {
         throw "Error reading data";

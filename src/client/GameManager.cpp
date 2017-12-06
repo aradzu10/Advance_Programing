@@ -6,7 +6,7 @@ Name: Arad Zulti
 */
 
 #include "GameManager.h"
-#include "ConsolePlayer.h"
+#include "HumanPlayer.h"
 #include "ConsolePrinter.h"
 
 GameManager::GameManager(BoardManager& board_) : board(board_) {
