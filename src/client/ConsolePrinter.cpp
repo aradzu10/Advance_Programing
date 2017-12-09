@@ -7,6 +7,7 @@ Name: Arad Zulti
 
 #include "ConsolePrinter.h"
 #include <iostream>
+
 using namespace std;
 
 
@@ -77,4 +78,10 @@ char ConsolePrinter::ReturnLetterToPrint(Checker checker) const
 		break;
 	}
 	return 0;
+}
+
+std::string ConsolePrinter::GetDataFromUser() {
+	std::string s;
+	getline(cin, s);
+    return s;
 }

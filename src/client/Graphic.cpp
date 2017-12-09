@@ -27,3 +27,7 @@ void Graphic::PrintMessage(std::string s) const {
 
 void Graphic::PrintWinnerMessage(Checker winner) {
 }
+
+std::string Graphic::GetDataFromUser() {
+    return "";
+}

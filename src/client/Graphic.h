@@ -18,7 +18,7 @@ public:
 	Graphic();
 	virtual ~Graphic();
 	//print who turn is that
-	virtual void PrintTurnOf(Checker player) const;
+	virtual void PrintTurnOf(Checker player) const = 0;
 	//print board
 	virtual void PrintBoard(const Matrix<Checker>& board, int size) const;
 	//print available in board
@@ -27,5 +27,7 @@ public:
 	virtual void PrintMessage(std::string s) const;
 	//print winner messgae
 	virtual void PrintWinnerMessage(Checker winner);
+	//ask for data from user
+	virtual std::string GetDataFromUser();
 };
 #endif

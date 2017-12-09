@@ -28,6 +28,8 @@ public:
 	virtual void PrintMessage(std::string s) const;
 	//print winner messgae
 	virtual void PrintWinnerMessage(Checker winner);
+	//ask for data from user
+	virtual std::string GetDataFromUser();
 private:
 	//get letter from checker
 	char ReturnLetterToPrint(Checker checker) const;

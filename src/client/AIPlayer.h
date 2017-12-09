@@ -28,6 +28,8 @@ private:
 	int EmulateOpponentTurn(const BoardManager& bm);
 	int EmulateMyTurnOthers(const BoardManager& bm);
 	int GetScoreOfBoard(const BoardManager& b, Checker checker);
+private:
+	const BoardManager& board;
 };
 
 #endif // !AI_PLAYER_

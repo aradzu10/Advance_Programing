@@ -7,24 +7,20 @@ Name: Arad Zulti
 
 #include "HumanPlayer.h"
 #include <iostream>
+#include <cstdio>
 
 using namespace std;
 
-HumanPlayer::HumanPlayer(Checker color, const BoardManager& board_, Graphic* graphic_) :
-		Player(color, board_, graphic_) {}
+HumanPlayer::HumanPlayer(Checker color, Graphic* graphic_) :
+		Player(color, graphic_) {}
 
 HumanPlayer::~HumanPlayer() {}
 
 Point HumanPlayer::GetPointFromPlayer() {
-	int row, col;
+	int row = 0, col = 0;
 	graphic->PrintMessage("Please enter location to put disc (format: \"row colum\"): ");
-	cin >> row;
-	cin >> col;
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(1000,'\n');
-		return Point(-1, 0);
-	}
+	std::string line = graphic->GetDataFromUser();
+	sscanf(line.c_str(), "%d %d", &row, &col);
 	return Point(row - 1, col - 1);
 }
 

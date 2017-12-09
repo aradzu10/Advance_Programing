@@ -17,7 +17,7 @@ class Player
 {
 public:
 	Player();
-	Player(Checker color, const BoardManager& board_, Graphic* graphic_);
+	Player(Checker color, Graphic* graphic_);
 	virtual ~Player();
 	virtual Checker GetColor();
 	//get point from player - return false point, childs will change it
@@ -31,7 +31,6 @@ public:
 protected:
 	//members
 	Checker player_color;
-	const BoardManager& board;
 	Graphic* graphic;
 };
 #endif // !PLAYER_H_

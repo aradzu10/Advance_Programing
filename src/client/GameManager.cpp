@@ -11,8 +11,8 @@ Name: Arad Zulti
 
 GameManager::GameManager(BoardManager& board_) : board(board_) {
 	printer = new ConsolePrinter();
-	white = new HumanPlayer(White, board, printer);
-	black = new HumanPlayer(Black, board, printer);
+	white = new HumanPlayer(White, printer);
+	black = new HumanPlayer(Black, printer);
 }
 
 void GameManager::SetPrinter(Graphic* printer_) {
@@ -48,7 +48,6 @@ void GameManager::StartGame() {
 		printer->PrintBoard(board.GetBoard(), board.GetSize());
 		currentPlayer->MyTurn();
 		if (!board.CheckPlayerAvailable(currentPlayer->GetColor())) {
-			currentPlayer->NoMove();
 			if (board.CheckIfGameEnded()) {
 				currentPlayer->GameEnded();
 				if (board.ReturnWinner() == Nothing) {
@@ -58,6 +57,7 @@ void GameManager::StartGame() {
 				}
 				break;
 			}
+			currentPlayer->NoMove();
 			printer->PrintMessage("Turn go to next player");
 			tmpP = currentPlayer;
 			currentPlayer = nextPlayer;

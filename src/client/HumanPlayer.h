@@ -14,7 +14,7 @@ Name: Arad Zulti
 class HumanPlayer : public Player {
 
 public:
-	HumanPlayer(Checker color, const BoardManager& board_, Graphic* graphic_);
+	HumanPlayer(Checker color, Graphic* graphic_);
 	virtual ~HumanPlayer();
 	//get point from player
 	virtual Point GetPointFromPlayer();

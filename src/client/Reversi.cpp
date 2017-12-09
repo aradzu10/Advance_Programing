@@ -26,12 +26,14 @@ Reversi::~Reversi() {
 
 void Reversi::ChangeSettings() {
 	int task;
+	string temp;
 	cout << "Please choose type of opponent:" << endl;
 	cout << "1 - AI player" << endl;
 	cout << "2 - Both AI players" << endl;
 	cout << "3 - Human player" << endl;
 	cout << "4 - Online player" << endl;
 	cin >> task;
+	getline(cin, temp);
 	Graphic *printer;
 	ServerLinker *link = new ServerLinker();
 	char *tmp;
@@ -39,7 +41,7 @@ void Reversi::ChangeSettings() {
 		case 1:
 			printer = new ConsolePrinter();
 			game.SetPrinter(printer);
-			game.SetPlayers(new HumanPlayer(White, board, printer), new AIPlayer(Black, board, printer));
+			game.SetPlayers(new HumanPlayer(White, printer), new AIPlayer(Black, board, printer));
 			break;
 		case 2:
 			printer = new ConsolePrinter();
@@ -54,11 +56,11 @@ void Reversi::ChangeSettings() {
 			std::cout << "waiting for opponent" << std::endl;
 			tmp = link->ReadDataFromServer();
             if(!strcmp(tmp, "1")) {
-				game.SetPlayers(new RemotePlayerReceiver(White, board, printer, link),
-								new RemotePlayerSender(link, new HumanPlayer(Black, board, printer)));
+				game.SetPlayers(new RemotePlayerReceiver(White, printer, link),
+								new RemotePlayerSender(link, new HumanPlayer(Black, printer)));
 			} else {
-				game.SetPlayers(new RemotePlayerSender(link, new HumanPlayer(White, board, printer)),
-								new RemotePlayerReceiver(Black, board, printer, link));
+				game.SetPlayers(new RemotePlayerSender(link, new HumanPlayer(White, printer)),
+								new RemotePlayerReceiver(Black, printer, link));
 			}
             delete tmp;
             break;

@@ -10,7 +10,8 @@ Name: Arad Zulti
 
 using namespace std;
 
-AIPlayer::AIPlayer(Checker color, const BoardManager& board_, Graphic* graphic_) : Player(color, board_, graphic_) {
+AIPlayer::AIPlayer(Checker color, const BoardManager& board_, Graphic* graphic_) :
+		Player(color, graphic_), board(board_) {
 }
 
 AIPlayer::~AIPlayer() {
