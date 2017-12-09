@@ -22,7 +22,7 @@ set(SERVER_SOURCE_FILE src/server/Server.cpp src/server/Server.h src/connectionS
 set(TEST_FILES src/client/tests/Temp.cpp src/client/tests/AIPlayer.cpp src/client/tests/BoardManager_Test.cpp src/client/tests/RegularRule_Test.cpp
         src/client/tests/ConsolePrinter_Test.cpp)
 
-add_executable(Reversi ${CLIENT_SOURCE_FILES} src/client/ClientMain.cpp)
+add_executable(Reversi ${CLIENT_SOURCE_FILES} src/client/PlayReversi.cpp)
 add_executable(Server ${SERVER_SOURCE_FILE} src/server/ServerMain.cpp)
 add_executable(ReversiTests ${CLIENT_SOURCE_FILES} ${TEST_FILES} src/client/tests/gtest_main.cpp)
 target_link_libraries(ReversiTests gtest gtest_main)

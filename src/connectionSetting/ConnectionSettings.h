@@ -16,7 +16,7 @@ public:
     //constructor for default file
     ConnectionSettings();
     //constructor change file name settings
-    ConnectionSettings(const char *file);
+    ConnectionSettings(std::string file);
     ~ConnectionSettings();
     //analise ip and port from file
     void Setup();
@@ -33,7 +33,7 @@ private:
 
 private:
     //members
-    const char* fileAddress;
+    std::string fileAddress;
     std::string IPAddress;
     int port;
     int maxDataSizeTransfer;

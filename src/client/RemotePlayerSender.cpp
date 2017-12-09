@@ -43,6 +43,7 @@ void RemotePlayerSender::SuccessfulTurn(Point point) {
 }
 
 void RemotePlayerSender::NoMove() {
+    localPlayer->NoMove();
     const char* noMove = "NoMove";
     serverLinker->WriteDataToServer(noMove, sizeof(noMove));
 }
