@@ -9,14 +9,19 @@
 
 #define MAX_SIZE_OF_DATA 81920
 
-ServerLinker::ServerLinker() {
+ServerLinker::ServerLinker() : clientSocket(0) {
     ConnectionSettings settings;
     settings.Setup();
-    ServerLinker(settings.GetIPaddress().c_str(), settings.GetPort());
+    serverIP = settings.GetIPaddress();
+    serverPort = settings.GetPort();
 }
 
-ServerLinker::ServerLinker(const char *serverIP, int serverPort) :
+ServerLinker::ServerLinker(const std::string& serverIP, int serverPort) :
         serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
+
+ServerLinker::~ServerLinker() {
+    close(clientSocket);
+}
 
 void ServerLinker::ConnectToServer() {
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -24,7 +29,7 @@ void ServerLinker::ConnectToServer() {
         throw "Error opening socket";
     }
     struct in_addr address;
-    if (!inet_aton(serverIP, &address)) {
+    if (!inet_aton(serverIP.c_str(), &address)) {
         throw "Can't parse IP address";
     }
     struct hostent *server;
@@ -44,7 +49,7 @@ void ServerLinker::ConnectToServer() {
 }
 
 char *ServerLinker::ReadDataFromServer() {
-    char buffer[MAX_SIZE_OF_DATA];
+    char *buffer = new char[MAX_SIZE_OF_DATA];
     memset(buffer, 0, MAX_SIZE_OF_DATA);
     int check = read(clientSocket, buffer, MAX_SIZE_OF_DATA);
     if (check < 0) {

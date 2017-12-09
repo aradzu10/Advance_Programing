@@ -40,8 +40,8 @@ GameManager::~GameManager() {
 }
 
 void GameManager::StartGame() {
-	Player *currentPlayer = white;
-	Player *nextPlayer = black;
+	Player *currentPlayer = black;
+	Player *nextPlayer = white;
 	Player *tmpP;
 	while (true) {
 		board.FindAllAvailable();
@@ -69,7 +69,7 @@ void GameManager::StartGame() {
 		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), currentPlayer->GetColor())) {
 			tmp = currentPlayer->PointNotAvailable();
 		}
-		currentPlayer->SuccessfulTurn();
+		currentPlayer->SuccessfulTurn(tmp);
 		tmpP = currentPlayer;
 		currentPlayer = nextPlayer;
 		nextPlayer = tmpP;

@@ -61,12 +61,12 @@ void Server::InitiateServer() {
 }
 
 void Server::InitiatePlayers(int player1, int player2) {
-    char *black = "1";
-    char *white = "2";
-    if (send(player1, black, sizeof(black), 0) < 0) {
+    std::string black = "1";
+    std::string white = "2";
+    if (send(player1, black.c_str(), sizeof(black), 0) < 0) {
         throw "Error on Initiate player2";
     }
-    if (send(player2, white, sizeof(white), 0) < 0) {
+    if (send(player2, white.c_str(), sizeof(white), 0) < 0) {
         throw "Error on Initiate player1";
     }
 
@@ -86,16 +86,15 @@ void Server::CommunicationStream(int player1, int player2) {
 }
 
 bool Server::TransferData(int sender, int receiver) {
-    char* buffer[MAX_SIZE_OF_DATA];
+    char buffer[MAX_SIZE_OF_DATA];
     memset(buffer, 0, MAX_SIZE_OF_DATA);
     int check = read(sender, buffer, MAX_SIZE_OF_DATA);
     if (check <= 0) {
-        false;
+        return false;
     }
-    std::cout << buffer << std::endl;
     check = send(receiver, buffer, MAX_SIZE_OF_DATA, 0);
     if (check <= 0) {
-        false;
+        return false;
     }
     return true;
 }

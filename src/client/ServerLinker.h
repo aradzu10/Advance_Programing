@@ -1,16 +1,18 @@
 #ifndef SERVER_LINKER_
 #define SERVER_LINKER_
 
+#include <iostream>
 
 class ServerLinker {
 public:
     ServerLinker();
-    ServerLinker(const char *serverIP, int serverPort);
+    ServerLinker(const std::string& serverIP, int serverPort);
+    ~ServerLinker();
     void ConnectToServer();
     char* ReadDataFromServer();
     void WriteDataToServer(const char* buffer, int size);
 private:
-    const char* serverIP;
+    std::string serverIP;
     int serverPort;
     int clientSocket;
 };

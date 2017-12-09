@@ -6,7 +6,7 @@
 
 class RemotePlayerSender : public Player {
 public:
-    RemotePlayerSender(ServerLinker& serverLinker_, Player *localPlayer);
+    RemotePlayerSender(ServerLinker *serverLinker_, Player *localPlayer);
     virtual ~RemotePlayerSender();
 
     virtual Checker GetColor();
@@ -19,7 +19,7 @@ public:
     virtual void GameEnded();
 
 private:
-    ServerLinker& serverLinker;
+    ServerLinker *serverLinker;
     Player *localPlayer;
 };
 

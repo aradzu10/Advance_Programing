@@ -25,6 +25,9 @@ BoardManager::~BoardManager() {
 }
 
 void BoardManager::Init() {//board resize, Init
+	if (board_size == 0) {
+		return;
+	}
 	board.resize(board_size, board_size);
 	for (int r = 0; r < this->board_size; r++) {
 		for (int c = 0; c < this->board_size; c++) {

@@ -24,7 +24,7 @@ private:
 
 private:
     char* fileAddress;
-    std::string IPaddress;
+    std::string IPAddress;
     int port;
 };
 

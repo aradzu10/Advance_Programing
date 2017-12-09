@@ -15,7 +15,7 @@ using namespace std;
 #include "HumanPlayer.h"
 #include "ServerLinker.h"
 #include "RemotePlayerSender.h"
-#include "RemotePlayerReciver.h"
+#include "RemotePlayerReceiver.h"
 
 Reversi::Reversi(int size) : board_size(size), board(board_size), game(board) {
 	ChangeSettings();
@@ -32,8 +32,9 @@ void Reversi::ChangeSettings() {
 	cout << "3 - Human player" << endl;
 	cout << "4 - Online player" << endl;
 	cin >> task;
-
 	Graphic *printer;
+	ServerLinker *link = new ServerLinker();
+	char *tmp;
 	switch (task) {
 		case 1:
 			printer = new ConsolePrinter();
@@ -48,18 +49,18 @@ void Reversi::ChangeSettings() {
 		case 4:
 			printer = new ConsolePrinter();
 			game.SetPrinter(printer);
-			ServerLinker link;
-            link.ConnectToServer();
-            Checker myColor, opponentColor;
-            if(!strcmp(link.ReadDataFromServer(), "1")) {
-                myColor = Black;
-                opponentColor = White;
-            } else {
-                myColor = White;
-                opponentColor = Black;
-            }
-            game.SetPlayers(new RemotePlayerSender(link, new HumanPlayer(myColor, board, printer)),
-                            new RemotePlayerReciver(opponentColor, board, printer, link));
+            link->ConnectToServer();
+			std::cout << "connected to server" << std::endl;
+			std::cout << "waiting for opponent" << std::endl;
+			tmp = link->ReadDataFromServer();
+            if(!strcmp(tmp, "1")) {
+				game.SetPlayers(new RemotePlayerReceiver(White, board, printer, link),
+								new RemotePlayerSender(link, new HumanPlayer(Black, board, printer)));
+			} else {
+				game.SetPlayers(new RemotePlayerSender(link, new HumanPlayer(White, board, printer)),
+								new RemotePlayerReceiver(Black, board, printer, link));
+			}
+            delete tmp;
             break;
 		default:
 			break;

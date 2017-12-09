@@ -8,7 +8,7 @@ Name: Arad Zulti
 #include "Reversi.h"
 
 int main() {
-	Reversi reversi(8);
+	Reversi reversi(4);
 	reversi.StartGame();
 	return 0;
 }

@@ -4,15 +4,15 @@
 #include "Player.h"
 #include "ServerLinker.h"
 
-class RemotePlayerReciver : public Player {
+class RemotePlayerReceiver : public Player {
 public:
-    RemotePlayerReciver(Checker color, const BoardManager &board_, Graphic *graphic_, ServerLinker& serverLinker_);
-    virtual ~RemotePlayerReciver();
+    RemotePlayerReceiver(Checker color, const BoardManager &board_, Graphic *graphic_, ServerLinker *serverLinker_);
+    virtual ~RemotePlayerReceiver();
     virtual Point GetPointFromPlayer();
     //get point from player, with an error message
     virtual Point PointNotAvailable();
 
 private:
-    ServerLinker& serverLinker;
+    ServerLinker *serverLinker;
 };
 #endif //REMOTE_PLAYER_RECIVER_

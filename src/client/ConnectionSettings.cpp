@@ -2,7 +2,7 @@
 #include<fstream>
 #include <string>
 #include <cstring>
-
+#define MAX_LEN 20
 using namespace std;
 
 ConnectionSettings::ConnectionSettings() {
@@ -16,7 +16,7 @@ int ConnectionSettings::GetPort() const {
 }
 
 const std::string &ConnectionSettings::GetIPaddress() const {
-    return IPaddress;
+    return IPAddress;
 }
 
 ConnectionSettings::~ConnectionSettings() {}
@@ -31,22 +31,23 @@ void ConnectionSettings::Setup() {
 int ConnectionSettings::ReadFromFile() {
     string line;
     ifstream file(fileAddress);
-    string ip , adress;
-    string portField;
+    char ip[MAX_LEN];
+    char address[MAX_LEN];
+    char portField[MAX_LEN];
     int portNumber;
     if (file.is_open()) {
         getline(file,line);
-        sscanf(line, "%s: %d", portField , portNumber);
-        if (strcmp(portField, "Port")) {
+        sscanf(line.c_str(), "%s : %d", portField , &portNumber);
+        if (!strcmp(portField, "Port")) {
             port = portNumber;
         } else {
             file.close();
             throw "cannot parse Port";
         }
         getline(file,line);
-        sscanf(line, "%s: %s", ip , adress);
-        if (strcmp(ip, "IP")) {
-            IPaddress = adress;
+        sscanf(line.c_str(), "%s : %s", ip , address);
+        if (!strcmp(ip, "IP")) {
+            IPAddress = address;
         } else {
             file.close();
             throw "cannot parse IP";
