@@ -12,10 +12,11 @@ Name: Arad Zulti
 using namespace std;
 
 ConnectionSettings::ConnectionSettings() {
-    fileAddress = "connection_settings.txt";
+    std::string s = "connection_settings.txt";
+    fileAddress = s.c_str();
 }
 
-ConnectionSettings::ConnectionSettings(char* file) : fileAddress(file) {}
+ConnectionSettings::ConnectionSettings(const char* file) : fileAddress(file) {}
 
 ConnectionSettings::~ConnectionSettings() {}
 
