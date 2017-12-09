@@ -7,7 +7,7 @@ Name: Arad Zulti
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
-#include "../client/ConsolePrinter.h"
+#include "../ConsolePrinter.h"
 
 TEST(CONSOLE_PRINTER, PRINT_TURN_OF) {
     ConsolePrinter *printer = new ConsolePrinter();

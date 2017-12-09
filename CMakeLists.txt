@@ -19,11 +19,11 @@ set(CLIENT_SOURCE_FILES src/client/AIPlayer.cpp src/client/AIPlayer.h src/client
 set(SERVER_SOURCE_FILE src/server/Server.cpp src/server/Server.h src/connectionSetting/ConnectionSettings.cpp
         src/connectionSetting/ConnectionSettings.h)
 
-set(TEST_FILES src/tests/Temp.cpp src/tests/AIPlayer.cpp src/tests/BoardManager_Test.cpp src/tests/RegularRule_Test.cpp
-        src/tests/ConsolePrinter_Test.cpp)
+set(TEST_FILES src/client/tests/Temp.cpp src/client/tests/AIPlayer.cpp src/client/tests/BoardManager_Test.cpp src/client/tests/RegularRule_Test.cpp
+        src/client/tests/ConsolePrinter_Test.cpp)
 
 add_executable(Reversi ${CLIENT_SOURCE_FILES} src/client/ClientMain.cpp)
 add_executable(Server ${SERVER_SOURCE_FILE} src/server/ServerMain.cpp)
-add_executable(ReversiTests ${CLIENT_SOURCE_FILES} ${TEST_FILES} src/tests/gtest_main.cpp)
+add_executable(ReversiTests ${CLIENT_SOURCE_FILES} ${TEST_FILES} src/client/tests/gtest_main.cpp)
 target_link_libraries(ReversiTests gtest gtest_main)
 add_test(ReversiTests ReversiTests)

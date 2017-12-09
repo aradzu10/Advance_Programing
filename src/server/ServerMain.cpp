@@ -6,7 +6,7 @@ Name: Arad Zulti
 */
 
 #include "Server.h"
-#include "../ConnectionSetting/ConnectionSettings.h"
+#include "../connectionSetting/ConnectionSettings.h"
 
 int main() {
     ConnectionSettings settings;
