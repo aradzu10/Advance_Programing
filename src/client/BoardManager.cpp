@@ -17,7 +17,6 @@ BoardManager::BoardManager(int size) : board_size(size), amountOfBlack(0), amoun
 BoardManager::BoardManager(const BoardManager& b) : board_size(b.board_size), finder(NULL) {
 	SetRule(b.finder->GetClone());
 	Init(b.GetBoard());
-//	SetCheckerAmount(b.amountOfBlack, b.amountOfWhite);
 }
 BoardManager::~BoardManager() {
 	if (finder)
@@ -66,10 +65,6 @@ void BoardManager::ResizeAndInit(int newSize) {
 	this->board_size = newSize;
 	this->Init();
 }
-void BoardManager::SetCheckerAmount(int blackAmount, int whiteAmount) {
-	amountOfBlack = blackAmount;
-	amountOfWhite = whiteAmount;
-}
 
 bool BoardManager::IsAvailable(int row, int colum, Checker available_to_check) {
 	if ((row < 0 || row >= board_size) || (colum < 0 || colum >= board_size)) {
@@ -95,7 +90,7 @@ void BoardManager::AddToSum(Checker checker, int amount) {
 bool BoardManager::DoTurn(int row, int col, Checker to_put)
 {
 	Checker check_available = GetAvailableChecker(to_put);
-	Checker to_turn_around = GetOppsiteChecker(to_put);
+	Checker to_turn_around = GetOppositeChecker(to_put);
 
 	if (!IsAvailable(row, col, check_available)) {
 		return false;

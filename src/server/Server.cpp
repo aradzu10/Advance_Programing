@@ -1,3 +1,10 @@
+/*
+ID: 318439981
+Name: Matan Dombelski
+ID: 315240564
+Name: Arad Zulti
+*/
+
 #include "Server.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -6,10 +13,9 @@
 #include <cstring>
 #include <iostream>
 
-#define MAX_CONNECTIONS 10
-#define MAX_SIZE_OF_DATA 81920
+#define MAX_CONNECTIONS 2
 
-Server::Server(int port_) : port(port_), serverSocket(0) {
+Server::Server(int port_, int maxData) : port(port_), serverSocket(0), maxDataSizeToTransfer(maxData) {
 }
 
 void Server::start() {
@@ -86,13 +92,13 @@ void Server::CommunicationStream(int player1, int player2) {
 }
 
 bool Server::TransferData(int sender, int receiver) {
-    char buffer[MAX_SIZE_OF_DATA];
-    memset(buffer, 0, MAX_SIZE_OF_DATA);
-    int check = read(sender, buffer, MAX_SIZE_OF_DATA);
+    char buffer[maxDataSizeToTransfer];
+    memset(buffer, 0, maxDataSizeToTransfer);
+    int check = read(sender, buffer, maxDataSizeToTransfer);
     if (check <= 0) {
         return false;
     }
-    check = send(receiver, buffer, MAX_SIZE_OF_DATA, 0);
+    check = send(receiver, buffer, maxDataSizeToTransfer, 0);
     if (check <= 0) {
         return false;
     }

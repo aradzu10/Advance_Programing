@@ -7,7 +7,7 @@ Name: Arad Zulti
 
 #include "Checker.h"
 
-Checker GetOppsiteChecker(Checker checker) {
+Checker GetOppositeChecker(Checker checker) {
 	if (checker == Black) {
 		return White;
 	}

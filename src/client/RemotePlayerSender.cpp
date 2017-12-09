@@ -1,3 +1,10 @@
+/*
+ID: 318439981
+Name: Matan Dombelski
+ID: 315240564
+Name: Arad Zulti
+*/
+
 #include "RemotePlayerSender.h"
 #include <sstream>
 
@@ -41,5 +48,6 @@ void RemotePlayerSender::NoMove() {
 }
 
 void RemotePlayerSender::GameEnded() {
-    localPlayer->GameEnded();
+    const char* noMove = "End";
+    serverLinker->WriteDataToServer(noMove, sizeof(noMove));
 }

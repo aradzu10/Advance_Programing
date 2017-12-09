@@ -6,7 +6,6 @@ Name: Arad Zulti
 */
 
 #include "HumanPlayer.h"
-#include <iostream>
 #include <cstdio>
 
 using namespace std;
@@ -25,15 +24,10 @@ Point HumanPlayer::GetPointFromPlayer() {
 }
 
 Point HumanPlayer::PointNotAvailable() {
-	int row, col;
+	int row = 0, col = 0;
 	graphic->PrintMessage("You enterd incorrect location...");
 	graphic->PrintMessage("Please enter new location to put disc (format: \"row column\"): ");
-	cin >> row;
-	cin >> col; 
-	if (cin.fail()) {
-		cin.clear();
-		cin.ignore(1000, '\n');
-		return Point(-1, 0);
-	}
+	std::string line = graphic->GetDataFromUser();
+	sscanf(line.c_str(), "%d %d", &row, &col);
 	return Point(row - 1, col - 1);
 }

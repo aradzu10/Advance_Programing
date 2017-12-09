@@ -1,8 +1,14 @@
+/*
+ID: 318439981
+Name: Matan Dombelski
+ID: 315240564
+Name: Arad Zulti
+*/
+
 #include "ConnectionSettings.h"
 #include<fstream>
-#include <string>
 #include <cstring>
-#define MAX_LEN 20
+#define MAX_LEN_IN_FILE 20
 using namespace std;
 
 ConnectionSettings::ConnectionSettings() {
@@ -10,6 +16,8 @@ ConnectionSettings::ConnectionSettings() {
 }
 
 ConnectionSettings::ConnectionSettings(char* file) : fileAddress(file) {}
+
+ConnectionSettings::~ConnectionSettings() {}
 
 int ConnectionSettings::GetPort() const {
     return port;
@@ -19,7 +27,9 @@ const std::string &ConnectionSettings::GetIPaddress() const {
     return IPAddress;
 }
 
-ConnectionSettings::~ConnectionSettings() {}
+int ConnectionSettings::GetMaxDataSizeTransfer() {
+    return maxDataSizeTransfer;
+}
 
 void ConnectionSettings::Setup() {
     int fileExist = ReadFromFile();
@@ -31,10 +41,11 @@ void ConnectionSettings::Setup() {
 int ConnectionSettings::ReadFromFile() {
     string line;
     ifstream file(fileAddress);
-    char ip[MAX_LEN];
-    char address[MAX_LEN];
-    char portField[MAX_LEN];
-    int portNumber;
+    char ip[MAX_LEN_IN_FILE];
+    char address[MAX_LEN_IN_FILE];
+    char portField[MAX_LEN_IN_FILE];
+    char maxLenField[MAX_LEN_IN_FILE];
+    int portNumber, maxLen;
     if (file.is_open()) {
         getline(file,line);
         sscanf(line.c_str(), "%s : %d", portField , &portNumber);
@@ -51,6 +62,14 @@ int ConnectionSettings::ReadFromFile() {
         } else {
             file.close();
             throw "cannot parse IP";
+        }
+        getline(file,line);
+        sscanf(line.c_str(), "%s : %d", maxLenField , &maxLen);
+        if (!strcmp(maxLenField, "MaxLen")) {
+            maxDataSizeTransfer = maxLen;
+        } else {
+            file.close();
+            throw "cannot parse max Len";
         }
         file.close();
     } else {

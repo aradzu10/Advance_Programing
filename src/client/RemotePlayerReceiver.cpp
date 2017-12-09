@@ -1,3 +1,10 @@
+/*
+ID: 318439981
+Name: Matan Dombelski
+ID: 315240564
+Name: Arad Zulti
+*/
+
 #include <cstdio>
 #include <cstring>
 #include <sstream>
@@ -29,7 +36,12 @@ Point RemotePlayerReceiver::PointNotAvailable() {
 }
 
 void RemotePlayerReceiver::NoMove() {
-    char *point = serverLinker->ReadDataFromServer();
-    delete point;
+    char *message = serverLinker->ReadDataFromServer();
+    delete message;
     Player::NoMove();
+}
+
+void RemotePlayerReceiver::GameEnded() {
+    char *message = serverLinker->ReadDataFromServer();
+    delete message;
 }

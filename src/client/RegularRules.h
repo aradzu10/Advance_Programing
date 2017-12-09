@@ -19,6 +19,7 @@ public:
 	virtual ~RegularRules();
 	//find all available
 	virtual void FindAllAvailable(Matrix<Checker>& board, int board_size);
+	//clone myself
 	virtual AvailableFinder* GetClone();
 
 private:

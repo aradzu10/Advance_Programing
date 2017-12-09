@@ -1,3 +1,10 @@
+/*
+ID: 318439981
+Name: Matan Dombelski
+ID: 315240564
+Name: Arad Zulti
+*/
+
 #include "ServerLinker.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -5,15 +12,15 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <cstring>
-#include "ConnectionSettings.h"
-
-#define MAX_SIZE_OF_DATA 81920
+#include "../ConnectionSettings.h"
 
 ServerLinker::ServerLinker() : clientSocket(0) {
     ConnectionSettings settings;
     settings.Setup();
     serverIP = settings.GetIPaddress();
     serverPort = settings.GetPort();
+    maxDataSize = settings.GetMaxDataSizeTransfer();
+
 }
 
 ServerLinker::ServerLinker(const std::string& serverIP, int serverPort) :
@@ -49,9 +56,9 @@ void ServerLinker::ConnectToServer() {
 }
 
 char *ServerLinker::ReadDataFromServer() {
-    char *buffer = new char[MAX_SIZE_OF_DATA];
-    memset(buffer, 0, MAX_SIZE_OF_DATA);
-    int check = read(clientSocket, buffer, MAX_SIZE_OF_DATA);
+    char *buffer = new char[maxDataSize];
+    memset(buffer, 0, maxDataSize);
+    int check = read(clientSocket, buffer, maxDataSize);
     if (check < 0) {
         throw "Error reading data";
     }
