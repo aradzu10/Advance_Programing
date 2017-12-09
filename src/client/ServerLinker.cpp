@@ -12,7 +12,7 @@ Name: Arad Zulti
 #include <netdb.h>
 #include <unistd.h>
 #include <cstring>
-#include "../ConnectionSettings.h"
+#include "../ConnectionSetting/ConnectionSettings.h"
 
 ServerLinker::ServerLinker() : clientSocket(0) {
     ConnectionSettings settings;

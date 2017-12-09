@@ -14,10 +14,10 @@ set(CLIENT_SOURCE_FILES src/client/AIPlayer.cpp src/client/AIPlayer.h src/client
         src/client/Point.cpp src/client/Point.h src/client/RegularRules.cpp src/client/RegularRules.h
         src/client/Reversi.cpp src/client/Reversi.h src/client/ServerLinker.cpp src/client/ServerLinker.h
         src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h src/client/RemotePlayerSender.cpp
-        src/client/RemotePlayerSender.h src/ConnectionSettings.cpp src/ConnectionSettings.h)
+        src/client/RemotePlayerSender.h src/connectionSetting/ConnectionSettings.cpp src/connectionSetting/ConnectionSettings.h)
 
-set(SERVER_SOURCE_FILE src/server/Server.cpp src/server/Server.h src/ConnectionSettings.cpp
-        src/ConnectionSettings.h)
+set(SERVER_SOURCE_FILE src/server/Server.cpp src/server/Server.h src/connectionSetting/ConnectionSettings.cpp
+        src/connectionSetting/ConnectionSettings.h)
 
 set(TEST_FILES src/tests/Temp.cpp src/tests/AIPlayer.cpp src/tests/BoardManager_Test.cpp src/tests/RegularRule_Test.cpp
         src/tests/ConsolePrinter_Test.cpp)
