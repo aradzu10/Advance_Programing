@@ -6,6 +6,7 @@ RemotePlayerSender::RemotePlayerSender(ServerLinker *serverLinker_, Player *loca
 
 RemotePlayerSender::~RemotePlayerSender() {
     delete serverLinker;
+    delete localPlayer;
 }
 
 Checker RemotePlayerSender::GetColor() {
