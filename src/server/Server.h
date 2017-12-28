@@ -4,29 +4,23 @@ Name: Matan Dombelski
 ID: 315240564
 Name: Arad Zulti
 */
-
 #ifndef SERVER_H
 #define SERVER_H
 
-//server.
+
 class Server {
+
 public:
-    //set port of server
-    Server(int port_, int maxData);
-    //start server
-    void start();
+    void Start();
+    void AcceptClient();
     //close server
-    void stop();
+    void Stop();
+    void HandleClient(int client);
+
 
 private:
     //initiate server - create socket, bind and listening
     void InitiateServer();
-    //send to player their color - 1, 2
-    void InitiatePlayers(int player1, int player2);
-    //call transfer data between sender and receiver, and switch between sender and receiver
-    void CommunicationStream(int player1, int player2);
-    //transfer data
-    bool TransferData(int sender, int receiver);
 
 private:
     //members
@@ -34,4 +28,6 @@ private:
     int maxDataSizeToTransfer;
     int serverSocket;
 };
+
+
 #endif //SERVER_H

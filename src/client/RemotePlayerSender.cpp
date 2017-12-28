@@ -36,7 +36,7 @@ void RemotePlayerSender::MyTurn() {
 
 void RemotePlayerSender::SuccessfulTurn(Point point) {
     std::stringstream temp_str;
-    temp_str<< point.getRow() << ", " << point.getCol();
+    temp_str << point.getRow() << ", " << point.getCol();
     std::string str = temp_str.str();
     const char* parsedPoint = str.c_str();
     serverLinker->WriteDataToServer(parsedPoint, sizeof(parsedPoint));

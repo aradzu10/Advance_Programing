@@ -16,8 +16,8 @@ set(CLIENT_SOURCE_FILES src/client/AIPlayer.cpp src/client/AIPlayer.h src/client
         src/client/RemotePlayerReceiver.cpp src/client/RemotePlayerReceiver.h src/client/RemotePlayerSender.cpp
         src/client/RemotePlayerSender.h src/connectionSetting/ConnectionSettings.cpp src/connectionSetting/ConnectionSettings.h)
 
-set(SERVER_SOURCE_FILE src/server/Server.cpp src/server/Server.h src/connectionSetting/ConnectionSettings.cpp
-        src/connectionSetting/ConnectionSettings.h)
+set(SERVER_SOURCE_FILE src/server/MatchHandler.cpp src/server/MatchHandler.h src/connectionSetting/ConnectionSettings.cpp
+        src/connectionSetting/ConnectionSettings.h src/server/Server.cpp src/server/Server.h src/server/CommandManager.cpp src/server/CommandManager.h src/server/Command.cpp src/server/Command.h src/server/MatchManager.cpp src/server/MatchManager.h)
 
 set(TEST_FILES src/client/tests/Temp.cpp src/client/tests/AIPlayer.cpp src/client/tests/BoardManager_Test.cpp src/client/tests/RegularRule_Test.cpp
         src/client/tests/ConsolePrinter_Test.cpp)

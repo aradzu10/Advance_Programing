@@ -5,13 +5,13 @@ ID: 315240564
 Name: Arad Zulti
 */
 
-#include "Server.h"
+#include "MatchHandler.h"
 #include "../connectionSetting/ConnectionSettings.h"
 
 int main() {
-    ConnectionSettings settings;
+    ConnectionSettings settings("connection_settings_server.txt");
     settings.Setup();
-    Server newServer(settings.GetPort(), settings.GetMaxDataSizeTransfer());
+    MatchHandler newServer(settings.GetPort(), settings.GetMaxDataSizeTransfer());
     newServer.start();
     newServer.stop();
     return 0;

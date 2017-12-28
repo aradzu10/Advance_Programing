@@ -1,0 +1,225 @@
+commit 86bda2000773e230cdc1ab4770b637b14ef6fb70
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 16:17:41 2017 +0200
+
+    Include comments
+
+commit 1f5dd018b4ac5bbe624411f15a2c49d7fb597040
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 15:09:13 2017 +0200
+
+    done ex4
+
+commit a20875118b2ba5ace9e65e770dd1fc1f5aae010d
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 14:14:39 2017 +0200
+
+    done ex4
+
+commit e8d59cd843a7229906a041f7efb61150a7ed3764
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 14:01:07 2017 +0200
+
+    done ex4
+
+commit e5f655b3b2deff43344b02261e07d82eb96a31d6
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Dec 6 18:48:38 2017 +0200
+
+    first check
+
+commit 5705a04be150f061feff428d4d5eeb6858c145e9
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Dec 6 17:18:00 2017 +0200
+
+    server final check
+    added PlayerReceiver and PlayerSender
+
+commit 98740f13608819a002adcac8879312279ddb8172
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Dec 6 15:49:59 2017 +0200
+
+    server almost done
+
+commit 6e7bceb5369c1ffa93538734e686628cc02f7694
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Dec 6 12:08:51 2017 +0200
+
+    testing server
+
+commit 5cd8cc7accef45c86d30be6762a56b978ede42c2
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 23:14:12 2017 +0200
+
+    ServerLinker update
+
+commit 9a6ba1368bbdc662b8d4b21b368907dd50774b9d
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 22:47:19 2017 +0200
+
+    ServerLinker prototype
+
+commit 96129f89aee5c088c9db228a94a1d1431b4371ba
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 22:19:46 2017 +0200
+
+    GameManager update
+
+commit fa21f463fb345d589f0c8375dae680b11b0e8745
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 21:46:35 2017 +0200
+
+    server complete
+
+commit 0f982583b62b13d1afa580101bb68fd467730e1c
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 21:38:51 2017 +0200
+
+    server complete
+
+commit 8b6dd1715134d39aa9ac59dd5fbcdb536aeae748
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 21:28:22 2017 +0200
+
+    start of server
+
+commit 1d030e30cf1bae7b5d012b6520e90e14a6007a0a
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 21:15:33 2017 +0200
+
+    start of server
+
+commit 27daf256c22a0184af2aaa4c1b3169b34f0076c8
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 21:02:36 2017 +0200
+
+    start of server
+
+commit ef844fca2f81a8bbe46cb3ec7594cebaf4b06de5
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Dec 5 20:55:57 2017 +0200
+
+    start of server
+
+commit b0eee1d3b6f35547f9c768e4506edc04e729f0d5
+Author: Matan <matan97d@gmail.com>
+Date:   Tue Dec 5 19:36:10 2017 +0200
+
+    added print in Reversi.cpp
+
+commit 65baf5a6c64c7b43b0752301b5a71964e7844353
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 14:24:27 2017 +0200
+
+    Final version for ex3.
+    added Info.txt
+
+commit 4ee3cd851cc9073ed52ee6b23a45557a9798f0fd
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 13:08:27 2017 +0200
+
+    Final version for ex3.
+    Both names.
+    Player menu.
+    Includes:
+    AI Player Test
+    Board Manager Test
+    Console Printer Test
+    Regular Rule Test
+
+commit e23689d6123e34b7eb3484043db570dfe6033e73
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 13:08:02 2017 +0200
+
+    Final version for ex3.
+    Both names.
+    Player menu.
+    Includes:
+    AI Player Test
+    Board Manager Test
+    Console Printer Test
+    Regular Rule Test
+
+commit 2aba79fef1d5d53d450faa5b5b38219a564c69a7
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 12:59:02 2017 +0200
+
+    More tests
+
+commit df4b75301f040cd9e218eba0d462ab46bad06e78
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 01:08:40 2017 +0200
+
+    More tests
+
+commit 2946ced1d2aa1de4668e5614c38efb4cb96c4b09
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 00:59:59 2017 +0200
+
+    More tests
+
+commit 5a86f771172d20f5d9e99561a9d75893814087e6
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Nov 29 00:07:00 2017 +0200
+
+    More tests
+
+commit 0847b96856fa3362df581414efcdc5721863b9bc
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Nov 28 22:44:38 2017 +0200
+
+    AI player Test
+
+commit 6030d204b8567adf99748e7610d169bb15df4cd0
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Nov 28 22:30:14 2017 +0200
+
+    AI player Test
+
+commit cee77a7e1ac348427569e54ace994682eb2f803a
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Nov 28 21:58:31 2017 +0200
+
+    AI player Test
+
+commit 287adcbfa979c80a196f193b2dc6f1516b9e273e
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Tue Nov 28 16:01:05 2017 +0200
+
+    try to add test
+
+commit 0e218433a0b1f426ad9cf33f70ae2edda78e0780
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Mon Nov 27 22:54:37 2017 +0200
+
+    Matan's changes
+
+commit 3e7dc5b574ab328b88f6b7082d36cedfa630ccc6
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Mon Nov 27 22:42:36 2017 +0200
+
+    Matan's changes
+
+commit 1cf622d1063b5b52ad9fbc1bb48bbc44f535ebc4
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Mon Nov 27 21:38:41 2017 +0200
+
+    lets start
+
+commit 68471503634db3db70b9a513e0d6f1496570be53
+Author: Matan <matan97d@gmail.com>
+Date:   Mon Nov 27 21:32:56 2017 +0200
+
+    added print in Reversi.cpp
+
+commit b66dca952bc4300e1290f72fd6d8eb75495896bd
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Mon Nov 27 21:28:20 2017 +0200
+
+    test1
+
+commit a29133de9da4d63a9b442725b054fe078ba344ac
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Mon Nov 27 20:51:33 2017 +0200
+
+    Initial commit

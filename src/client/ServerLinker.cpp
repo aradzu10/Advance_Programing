@@ -15,7 +15,7 @@ Name: Arad Zulti
 #include "../connectionSetting/ConnectionSettings.h"
 
 ServerLinker::ServerLinker() : clientSocket(0) {
-    ConnectionSettings settings;
+    ConnectionSettings settings("connection_settings_client.txt");
     settings.Setup();
     serverIP = settings.GetIPaddress();
     serverPort = settings.GetPort();
