@@ -17,6 +17,8 @@ public:
     //set port of server
     MatchHandler(int max);
 
+    ~MatchHandler();
+
     void setClientSocket1(int clientSocket1);
 
     void setClientSocket2(int clientSocket2);

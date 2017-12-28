@@ -10,6 +10,10 @@ Name: Arad Zulti
 
 class Command {
 
+public:
+    virtual ~Command() {}
+    virtual void execute(int clientSocket) = 0;
+
 };
 
 

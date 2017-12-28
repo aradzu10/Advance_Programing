@@ -18,7 +18,7 @@ class MatchManager {
 public:
     MatchManager(int max);
 
-private:
+    ~MatchManager();
 
     vector<string> GetGamesList();
 
@@ -29,6 +29,7 @@ private:
     void CloseMatch(string& name);
 
 private:
+
     map<string, MatchHandler*> matches;
     int maxDataSizeToTransfer;
 

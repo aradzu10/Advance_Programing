@@ -9,6 +9,12 @@ Name: Arad Zulti
 MatchManager::MatchManager(int max) : maxDataSizeToTransfer(max) {
 }
 
+MatchManager::~MatchManager() {
+    for(map<string, MatchHandler*>::iterator it = matches.begin(); it != matches.end(); ++it) {
+        it->second->Close();
+    }
+}
+
 vector<string> MatchManager::GetGamesList() {
     vector<string> matchesName;
     for(map<string, MatchHandler*>::iterator it = matches.begin(); it != matches.end(); ++it) {

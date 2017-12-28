@@ -15,6 +15,14 @@ Name: Arad Zulti
 #include <cstring>
 #include <iostream>
 
+Server::Server() {
+
+}
+
+Server::~Server() {
+
+}
+
 void Server::Start() {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket < 0) {
@@ -34,7 +42,6 @@ void Server::Start() {
         throw "Error on listening";
     }
 }
-
 
 void Server::Stop() {
     close(serverSocket);

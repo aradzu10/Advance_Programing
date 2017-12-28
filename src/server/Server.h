@@ -11,6 +11,11 @@ Name: Arad Zulti
 class Server {
 
 public:
+
+    Server();
+
+    ~Server();
+
     void Start();
     void AcceptClient();
     //close server

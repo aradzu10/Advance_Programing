@@ -10,5 +10,5 @@ CommandManager::CommandManager() {}
 
 void CommandManager::DoCommand(string &command, int clientSocket) {
     Command *c = commands[command];
-
+    c->execute(clientSocket);
 }

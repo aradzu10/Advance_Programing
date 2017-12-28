@@ -14,6 +14,10 @@ Name: Arad Zulti
 MatchHandler::MatchHandler(int max) : maxDataSizeToTransfer(max), clientSocket1(0), clientSocket2(0) {
 }
 
+MatchHandler::~MatchHandler() {
+    Close();
+}
+
 void MatchHandler::setClientSocket1(int clientSocket1) {
     MatchHandler::clientSocket1 = clientSocket1;
 }
