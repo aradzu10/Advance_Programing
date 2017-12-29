@@ -4,9 +4,17 @@ Name: Matan Dombelski
 ID: 315240564
 Name: Arad Zulti
 */
+
 #include "MatchManager.h"
 
+MatchManager::MatchManager() {
+}
+
 MatchManager::MatchManager(int max) : maxDataSizeToTransfer(max) {
+}
+
+void MatchManager::setMaxDataSizeToTransfer(int maxDataSizeToTransfer) {
+    MatchManager::maxDataSizeToTransfer = maxDataSizeToTransfer;
 }
 
 MatchManager::~MatchManager() {

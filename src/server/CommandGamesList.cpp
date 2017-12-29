@@ -17,13 +17,21 @@ CommandGamesList::~CommandGamesList() {
 
 }
 
-void CommandGamesList::execute(int clientSocket) {
-    vector<string> names = matchManager.GetGamesList();
+void CommandGamesList::execute(int clientSocket, string command) {
     int check;
-    for (int i=0; i < names.size(); i++) {
+
+    vector<string> names = matchManager.GetGamesList();
+    int size = names.size();
+    check = send(clientSocket, &size, sizeof(size), 0);
+    if (check <= 0) {
+
+        return;
+    }
+    for (int i=0; i < size; i++) {
         check = send(clientSocket, names[i].c_str(), names[i].size(), 0);
         if (check <= 0) {
-            break;
+
+            return;
         }
     }
 }

@@ -8,19 +8,25 @@ Name: Arad Zulti
 #define MAX_CONNECTIONS 10
 
 #include "Server.h"
+#include "MatchManager.h"
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
 #include <cstring>
 #include <iostream>
+#include "../connectionSetting/ConnectionSettings.h"
 
 Server::Server() {
-
+    ConnectionSettings settings;
+    settings.Setup();
+    port = settings.GetPort();
+    maxDataSizeToTransfer = settings.GetMaxDataSizeTransfer();
+    matchManager.setMaxDataSizeToTransfer(settings.GetMaxDataSizeTransfer());
+    commandManager.setMatchManager(matchManager);
 }
 
 Server::~Server() {
-
 }
 
 void Server::Start() {
@@ -56,7 +62,10 @@ void Server::AcceptClient() {
         close(serverSocket);
         throw "Error on accept";
     }
+    // add - theard here
+    HandleClient(clientSocket);
+}
 
-
-
+void Server::HandleClient(int client) {
+    
 }

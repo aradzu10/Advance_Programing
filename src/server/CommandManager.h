@@ -8,6 +8,7 @@ Name: Arad Zulti
 #define REVERSI_COMMANDMANAGER_H
 
 #include "Command.h"
+#include "MatchManager.h"
 #include <iostream>
 #include <map>
 using namespace std;
@@ -15,8 +16,9 @@ using namespace std;
 class CommandManager {
 public:
     CommandManager();
-    void DoCommand(string &command, int clientSocket);
-
+    CommandManager(MatchManager &matchManager);
+    void setMatchManager(MatchManager &matchManager);
+    void DoCommand(char* userInput, int clientSocket);
 
 private:
     map<string, Command*> commands;

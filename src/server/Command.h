@@ -7,12 +7,14 @@ Name: Arad Zulti
 #ifndef REVERSI_COMMAND_H
 #define REVERSI_COMMAND_H
 
+#include <iostream>
+using namespace std;
 
 class Command {
 
 public:
-    virtual ~Command() {}
-    virtual void execute(int clientSocket) = 0;
+    virtual ~Command();
+    virtual void execute(int clientSocket, string& command) = 0;
 
 };
 

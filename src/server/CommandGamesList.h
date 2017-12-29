@@ -18,7 +18,7 @@ public:
 
     virtual ~CommandGamesList();
 
-    virtual void execute(int clientSocket);
+    virtual void execute(int clientSocket, string command);
 
 
 private:

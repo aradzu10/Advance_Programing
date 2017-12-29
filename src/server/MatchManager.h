@@ -16,9 +16,13 @@ using namespace std;
 class MatchManager {
 
 public:
+    MatchManager();
+
     MatchManager(int max);
 
     ~MatchManager();
+
+    void setMaxDataSizeToTransfer(int maxDataSizeToTransfer);
 
     vector<string> GetGamesList();
 
@@ -29,7 +33,6 @@ public:
     void CloseMatch(string& name);
 
 private:
-
     map<string, MatchHandler*> matches;
     int maxDataSizeToTransfer;
 

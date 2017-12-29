@@ -8,6 +8,9 @@ Name: Arad Zulti
 #define SERVER_H
 
 
+#include "MatchManager.h"
+#include "CommandManager.h"
+
 class Server {
 
 public:
@@ -32,6 +35,8 @@ private:
     int port;
     int maxDataSizeToTransfer;
     int serverSocket;
+    MatchManager matchManager;
+    CommandManager commandManager;
 };
 
 
