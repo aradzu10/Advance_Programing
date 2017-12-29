@@ -67,5 +67,11 @@ void Server::AcceptClient() {
 }
 
 void Server::HandleClient(int client) {
-    
+    char buffer[maxDataSizeToTransfer];
+    memset(buffer, 0, maxDataSizeToTransfer);
+    int check = read(client, buffer, maxDataSizeToTransfer);
+    if (check <= 0) {
+        return;
+    }
+    commandManager.DoCommand(buffer, client);
 }
