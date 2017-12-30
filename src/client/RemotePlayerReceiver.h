@@ -25,6 +25,8 @@ public:
     //receive end game message
     virtual void GameEnded();
 
+    virtual bool PlayerInGame();
+
 private:
     //members
     ServerLinker *serverLinker;

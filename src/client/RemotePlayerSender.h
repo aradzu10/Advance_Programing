@@ -31,6 +31,8 @@ public:
     //alart game ended
     virtual void GameEnded();
 
+    virtual bool PlayerInGame();
+
 private:
     //members
     ServerLinker *serverLinker;

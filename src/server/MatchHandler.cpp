@@ -37,13 +37,24 @@ void MatchHandler::Start() {
 }
 
 void MatchHandler::InitiatePlayers() {
+    int size = 1;
     std::string black = "1";
     std::string white = "2";
-    if (send(clientSocket1, black.c_str(), sizeof(black), 0) < 0) {
+    int check = send(clientSocket1, &size, sizeof(size), 0);
+    if (check < 0) {
+        throw "Error on Initiate player1";
+    }
+    check = send(clientSocket1, black.c_str(), black.size(), 0);
+    if (check < 0) {
+        throw "Error on Initiate player1";
+    }
+    check = send(clientSocket2, &size, sizeof(size), 0);
+    if (check < 0) {
         throw "Error on Initiate player2";
     }
-    if (send(clientSocket2, white.c_str(), sizeof(white), 0) < 0) {
-        throw "Error on Initiate player1";
+    check = send(clientSocket2, white.c_str(), white.size(), 0);
+    if (check < 0) {
+        throw "Error on Initiate player2";
     }
 
 }

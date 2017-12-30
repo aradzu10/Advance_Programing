@@ -14,7 +14,7 @@ Name: Arad Zulti
 #include <cstring>
 #include "../connectionSetting/ConnectionSettings.h"
 
-ServerLinker::ServerLinker() : clientSocket(0) {
+ServerLinker::ServerLinker() : clientSocket(0), connnectedToServer(false) {
     ConnectionSettings settings("connection_settings_client.txt");
     settings.Setup();
     serverIP = settings.GetIPaddress();
@@ -24,10 +24,14 @@ ServerLinker::ServerLinker() : clientSocket(0) {
 }
 
 ServerLinker::ServerLinker(const std::string& serverIP, int serverPort) :
-        serverIP(serverIP), serverPort(serverPort), clientSocket(0) {}
+        serverIP(serverIP), serverPort(serverPort), clientSocket(0), connnectedToServer(false) {}
 
 ServerLinker::~ServerLinker() {
     close(clientSocket);
+}
+
+bool ServerLinker::isConnnectedToServer() const {
+    return connnectedToServer;
 }
 
 void ServerLinker::ConnectToServer() {
@@ -53,21 +57,40 @@ void ServerLinker::ConnectToServer() {
     if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
         throw "Error connecting to server";
     }
+    connnectedToServer = true;
+}
+
+int ServerLinker::ReadNumberFromServer() {
+    int num = -1;
+    int check = read(clientSocket, &num, sizeof(num));
+    if (check <= 0) {
+        connnectedToServer = false;
+    }
+
+    return num;
 }
 
 char *ServerLinker::ReadDataFromServer() {
-    char *buffer = new char[maxDataSize];
-    memset(buffer, 0, maxDataSize);
-    int check = read(clientSocket, buffer, maxDataSize);
-    if (check < 0) {
-        throw "Error reading data";
+    return ReadDataFromServer(maxDataSize);
+}
+
+char *ServerLinker::ReadDataFromServer(int size) {
+    if (size < 1) {
+        return new char[1];
     }
+    char *buffer = new char[size];
+    memset(buffer, 0, size);
+    int check = read(clientSocket, buffer, size);
+    if (check <= 0) {
+        connnectedToServer = false;
+    }
+
     return buffer;
 }
 
 void ServerLinker::WriteDataToServer(const char *buffer, int size) {
     int check = send(clientSocket, buffer, size, 0);
-    if (check < 0) {
-        throw "Error reading data";
+    if (check <= 0) {
+        connnectedToServer = false;
     }
 }

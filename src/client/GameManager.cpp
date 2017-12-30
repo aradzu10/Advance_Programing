@@ -43,7 +43,7 @@ void GameManager::StartGame() {
 	Player *currentPlayer = black;
 	Player *nextPlayer = white;
 	Player *tmpP;
-	while (true) {
+	while (currentPlayer->PlayerInGame()) {
 		board.FindAllAvailable();
 		printer->PrintBoard(board.GetBoard(), board.GetSize());
 		currentPlayer->MyTurn();
@@ -66,7 +66,7 @@ void GameManager::StartGame() {
 		}
 		printer->PrintAvilable(board.GetBoard(), board.GetSize(), GetAvailableChecker(currentPlayer->GetColor()));
 		Point tmp = currentPlayer->GetPointFromPlayer();
-		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), currentPlayer->GetColor())) {
+		while (!board.DoTurn(tmp.getRow(), tmp.getCol(), currentPlayer->GetColor()) && currentPlayer->PlayerInGame()) {
 			tmp = currentPlayer->PointNotAvailable();
 		}
 		currentPlayer->SuccessfulTurn(tmp);

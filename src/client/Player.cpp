@@ -41,3 +41,7 @@ void Player::NoMove() {
 
 void Player::GameEnded() {
 }
+
+bool Player::PlayerInGame() {
+	return true;
+}

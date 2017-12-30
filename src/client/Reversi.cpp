@@ -74,7 +74,7 @@ void Reversi::SetupRemoteGame() {
 
 void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 	char *tmp;
-	while(true) {
+	while(link->isConnnectedToServer()) {
 		printer->PrintMessage("Choose Option:");
 		printer->PrintMessage("1. list games");
 		printer->PrintMessage("2. join <game name>");
@@ -82,7 +82,8 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 		string input = printer->GetDataFromUser();
 		if (input.find("start") == 0 || input.find("join") == 0) {
 			link->WriteDataToServer(input.c_str(), input.size());
-			tmp = link->ReadDataFromServer();
+			int size = link->ReadNumberFromServer();
+            tmp = link->ReadDataFromServer(size);
 			if (strcmp(tmp, "failed") == 0) {
 				printer->PrintMessage("Operation failed!");
 				delete tmp;
@@ -93,30 +94,26 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 			int len;
 			string gameList = "list_games";
 			link->WriteDataToServer(gameList.c_str(), gameList.size());
-			tmp = link->ReadDataFromServer(); // get num of games
-			if (strcmp(tmp, "0") == 0) {
+			len = link->ReadNumberFromServer(); // get num of games
+			if (len == 0) {
 				printer->PrintMessage("There are no Games");
-				tmp = link->ReadDataFromServer();
-				delete tmp;
 				continue;
 			}
-			sscanf(tmp, "%d", &len);
-			delete tmp;
 			for (int i = 0; i < len; i++) {
-				tmp = link->ReadDataFromServer();
+				int nameSize = link->ReadNumberFromServer();
+				tmp = link->ReadDataFromServer(nameSize);
 				string temp(tmp);
 				printer->PrintMessage(temp);
 				delete tmp;
 			}
-			tmp = link->ReadDataFromServer();
-			delete tmp;
 		} else {
 			printer->PrintMessage("Invalid input!");
 		}
 	}
 	printer->PrintMessage("waiting for opponent");
 	if (strcmp(tmp, "success") == 0) {
-		tmp = link->ReadDataFromServer();
+		int num = link->ReadNumberFromServer();
+		tmp = link->ReadDataFromServer(num);
 	}
 	if(!strcmp(tmp, "1")) {
 		printer->PrintMessage("You are player X");

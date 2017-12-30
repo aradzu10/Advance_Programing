@@ -22,6 +22,8 @@ public:
 
     ~MatchManager();
 
+    void CloseAll();
+
     void setMaxDataSizeToTransfer(int maxDataSizeToTransfer);
 
     vector<string> GetGamesList();
@@ -30,7 +32,7 @@ public:
 
     int JoinMatch(string& name, int secondClient);
 
-    int CloseMatch(string& name);
+    int CloseMatch(const string& name);
 
 private:
     map<string, MatchHandler*> matches;

@@ -18,8 +18,12 @@ void MatchManager::setMaxDataSizeToTransfer(int maxDataSizeToTransfer) {
 }
 
 MatchManager::~MatchManager() {
+    CloseAll();
+}
+
+void MatchManager::CloseAll() {
     for (map<string, MatchHandler *>::iterator it = matches.begin(); it != matches.end(); ++it) {
-        it->second->Close();
+        CloseMatch(it->first);
     }
 }
 
@@ -53,7 +57,7 @@ int MatchManager::JoinMatch(string &name, int secondClient) {
     return 0;
 }
 
-int MatchManager::CloseMatch(string &name) {
+int MatchManager::CloseMatch(const string &name) {
     if (matches.find(name) == matches.end()) {
         return 1;
     }

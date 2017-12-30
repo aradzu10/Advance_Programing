@@ -45,3 +45,7 @@ void RemotePlayerReceiver::GameEnded() {
     char *message = serverLinker->ReadDataFromServer();
     delete message;
 }
+
+bool RemotePlayerReceiver::PlayerInGame() {
+    return serverLinker->isConnnectedToServer();
+}

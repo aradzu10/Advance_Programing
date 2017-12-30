@@ -32,6 +32,8 @@ public:
 	//alart game ended
 	virtual void GameEnded();
 
+	virtual bool PlayerInGame();
+
 protected:
 	//members
 	Checker player_color;

@@ -18,20 +18,24 @@ CommandGamesList::~CommandGamesList() {
 
 }
 
-int CommandGamesList::execute(int clientSocket, string& command) {
+int CommandGamesList::execute(int clientSocket, string &command) {
     int check;
     vector<string> names = matchManager.GetGamesList();
-    stringstream size;
-    size <<  names.size();
-    check = send(clientSocket, size.str().c_str(), size.str().size(), 0);
+    int size = names.size();
+    check = send(clientSocket, &size, sizeof(size), 0);
     if (check <= 0) {
         return 0;
     }
-    for (int i=0; i < names.size(); i++) {
+    for (int i = 0; i < size; i++) {
+        int len = names[i].size();
+        check = send(clientSocket, &len, sizeof(len), 0);
+        if (check <= 0) {
+            return 0;
+        }
         check = send(clientSocket, names[i].c_str(), names[i].size(), 0);
         if (check <= 0) {
             return 0;
         }
     }
-    return 1;
+    return 2;
 }

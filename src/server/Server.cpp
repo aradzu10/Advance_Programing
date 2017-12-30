@@ -16,6 +16,7 @@ Name: Arad Zulti
 #include <cstring>
 #include <iostream>
 #include <pthread.h>
+#include <sstream>
 
 struct ServerAndClientSocket {
     Server* server;
@@ -50,6 +51,7 @@ void Server::Start() {
 }
 
 void Server::Stop() {
+    matchManager.CloseAll();
     close(serverSocket);
 }
 
@@ -71,39 +73,52 @@ void* Server::AcceptClient(void* nothing) {
     int rc = pthread_create(&threadsAcceptClient, NULL, AcceptClient_Thread, this);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
-        pthread_exit(NULL);
+    }
+    if (clientSocket < 1) {
+        cout << "Error: connecting to client" << endl;
     }
     struct ServerAndClientSocket args;
     args.server = this;
     args.ClientSocket = clientSocket;
+    cout << "1: " << clientSocket << endl;
+    cout << "1: " << args.ClientSocket << endl;
     rc = pthread_create(&threadsHandleClient, NULL, HandleClient_Thread, &args);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
-        pthread_exit(NULL);
     }
 }
 
 void* Server::HandleClient(void* clientT) {
-    long client = (long)clientT;
+    int client = *((int*)(&clientT));
+    cout << "2: " << client << endl;
     char buffer[maxDataSizeToTransfer];
     while(true) {
         memset(buffer, 0, maxDataSizeToTransfer);
         int check = read(client, buffer, maxDataSizeToTransfer);
-        if (check <= 0) {
-            pthread_exit(NULL);
-        }
-        if (commandManager.DoCommand(buffer, client) == 0) {
-            strcpy(buffer, "success");
-            check = send(client, buffer, maxDataSizeToTransfer, 0);
-            if (check <= 0) {
-                pthread_exit(NULL);
-            }
+        if (check < 0) {
+            cout << "not good: " << client << endl;
             break;
-        } else {
-            strcpy(buffer, "failed");
-            check = send(client, buffer, maxDataSizeToTransfer, 0);
+        }
+        int ans = commandManager.DoCommand(buffer, client);
+        if (ans == 0) {
+            string msg = "success";
+            int size = msg.size();
+            check = send(client, &size, sizeof(size), 0);
             if (check <= 0) {
-                pthread_exit(NULL);
+                break;
+            }
+            send(client, msg.c_str(), msg.size(), 0);
+            break;
+        } else if (ans == 1){
+            string msg = "failed";
+            int size = msg.size();
+            check = send(client, &size, sizeof(size), 0);
+            if (check <= 0) {
+                break;
+            }
+            check = send(client, msg.c_str(), msg.size(), 0);
+            if (check <= 0) {
+                break;
             }
         }
     }

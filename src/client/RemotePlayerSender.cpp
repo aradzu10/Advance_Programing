@@ -52,3 +52,7 @@ void RemotePlayerSender::GameEnded() {
     const char* noMove = "End";
     serverLinker->WriteDataToServer(noMove, sizeof(noMove));
 }
+
+bool RemotePlayerSender::PlayerInGame() {
+    return serverLinker->isConnnectedToServer();
+}
