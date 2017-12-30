@@ -15,7 +15,7 @@ class Server {
 
 public:
 
-    Server();
+    Server(int port, int max);
 
     ~Server();
 

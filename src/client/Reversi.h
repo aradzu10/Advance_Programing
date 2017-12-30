@@ -10,6 +10,7 @@ Name: Arad Zulti
 
 #include "GameManager.h"
 #include "BoardManager.h"
+#include "ServerLinker.h"
 
 class Reversi
 {
@@ -21,6 +22,11 @@ public:
 private:
 	//if you want to change the setting, like other players then the def, change here
 	void ChangeSettings();
+	void SetupLocalGameWithAIPlayer();
+	void SetupLocalGameWithBothAIPlayer();
+	void SetupRemoteGame();
+	void ClientMenu(ServerLinker *link, Graphic *printer);
+
 private:
 	//members
 	int board_size;

@@ -17,12 +17,7 @@ Name: Arad Zulti
 #include <iostream>
 #include "../connectionSetting/ConnectionSettings.h"
 
-Server::Server() {
-    ConnectionSettings settings;
-    settings.Setup();
-    port = settings.GetPort();
-    maxDataSizeToTransfer = settings.GetMaxDataSizeTransfer();
-    matchManager.setMaxDataSizeToTransfer(settings.GetMaxDataSizeTransfer());
+Server::Server(int port, int max) : port(port), maxDataSizeToTransfer(max), matchManager(max) {
     commandManager.setMatchManager(matchManager);
 }
 
