@@ -15,8 +15,8 @@ class CommandJoin : public Command {
 
 public:
     CommandJoin(MatchManager &matchManager);
-    virtual ~Command();
-    virtual void execute(int clientSocket, string& command);
+    virtual ~CommandJoin();
+    virtual int execute(int clientSocket, string& command);
 
 private:
     MatchManager& matchManager;

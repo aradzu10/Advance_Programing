@@ -68,7 +68,7 @@ void Reversi::SetupRemoteGame() {
 	game.SetPrinter(printer);
 	link->ConnectToServer();
 	printer->PrintMessage("connected to server");
-
+	ClientMenu(link, printer);
 
 }
 
@@ -76,20 +76,28 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 	char *tmp;
 	while(true) {
 		printer->PrintMessage("Choose Option:");
-		printer->PrintMessage("\tShow all games enter \"game list\"");
-		printer->PrintMessage("\tTo Join game enter \"join <game name>\"");
-		printer->PrintMessage("\tTo start new game enter \"start <game name>\"");
+		printer->PrintMessage("1. list games");
+		printer->PrintMessage("2. join <game name>");
+		printer->PrintMessage("3. start <game name>");
 		string input = printer->GetDataFromUser();
-		if (input.find("start") == 0 || input.find("join") == 0 || input.find("close") == 0) {
+		if (input.find("start") == 0 || input.find("join") == 0) {
 			link->WriteDataToServer(input.c_str(), input.size());
-			break;
-		} else if (input.find("game list") == 0) {
+			tmp = link->ReadDataFromServer();
+			if (strcmp(tmp, "failed") == 0) {
+				printer->PrintMessage("Operation failed!");
+				delete tmp;
+			} else {
+				break;
+			}
+		} else if (input.find("list games") == 0) {
 			int len;
-			string gameList = "game_list";
+			string gameList = "list_games";
 			link->WriteDataToServer(gameList.c_str(), gameList.size());
 			tmp = link->ReadDataFromServer(); // get num of games
 			if (strcmp(tmp, "0") == 0) {
 				printer->PrintMessage("There are no Games");
+				tmp = link->ReadDataFromServer();
+				delete tmp;
 				continue;
 			}
 			sscanf(tmp, "%d", &len);
@@ -100,16 +108,22 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 				printer->PrintMessage(temp);
 				delete tmp;
 			}
+			tmp = link->ReadDataFromServer();
+			delete tmp;
 		} else {
 			printer->PrintMessage("Invalid input!");
 		}
 	}
 	printer->PrintMessage("waiting for opponent");
-	tmp = link->ReadDataFromServer();
+	if (strcmp(tmp, "success") == 0) {
+		tmp = link->ReadDataFromServer();
+	}
 	if(!strcmp(tmp, "1")) {
+		printer->PrintMessage("You are player X");
 		game.SetPlayers(new RemotePlayerReceiver(White, printer, link),
 						new RemotePlayerSender(link, new HumanPlayer(Black, printer)));
 	} else {
+		printer->PrintMessage("You are player O");
 		game.SetPlayers(new RemotePlayerSender(link, new HumanPlayer(White, printer)),
 						new RemotePlayerReceiver(Black, printer, link));
 	}

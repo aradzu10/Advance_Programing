@@ -18,7 +18,7 @@ public:
     CommandManager();
     CommandManager(MatchManager &matchManager);
     void setMatchManager(MatchManager &matchManager);
-    void DoCommand(char* userInput, int clientSocket);
+    int DoCommand(char* userInput, int clientSocket);
 
 private:
     map<string, Command*> commands;

@@ -15,8 +15,8 @@ class CommandClose : public Command {
 
 public:
     CommandClose(MatchManager &matchManager);
-    virtual ~Command();
-    virtual void execute(int clientSocket, string& command);
+    virtual ~CommandClose();
+    virtual int execute(int clientSocket, string& command);
 
 private:
     MatchManager& matchManager;

@@ -42,7 +42,7 @@ void ConsolePrinter::PrintBoard(const Matrix<Checker>& board, int size) const {
 }
 
 void ConsolePrinter::PrintAvilable(const Matrix<Checker>& board, int size, Checker avilable_to_print) const {
-	cout << "Your avilable options are: " << endl;
+	cout << "The avilable options are: " << endl;
 	for (int r = 0; r < size; r++) {
 		for (int c = 0; c < size; c++) {
 			if (board[r][c] == avilable_to_print || board[r][c] == AvailableBoth) {

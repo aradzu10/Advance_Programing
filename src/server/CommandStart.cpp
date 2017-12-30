@@ -8,8 +8,10 @@ Name: Arad Zulti
 
 CommandStart::CommandStart(MatchManager &matchManager) : matchManager(matchManager) {}
 
-CommandStart::~Command() {}
+CommandStart::~CommandStart() {
 
-void CommandStart::execute(int clientSocket, string &command) {
-    matchManager.CreateNewMatch(command, clientSocket);
+}
+
+int CommandStart::execute(int clientSocket, string &command) {
+    return matchManager.CreateNewMatch(command, clientSocket);
 }

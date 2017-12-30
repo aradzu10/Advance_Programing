@@ -14,8 +14,7 @@ class Command {
 
 public:
     virtual ~Command();
-    virtual void execute(int clientSocket, string& command) = 0;
-
+    virtual int execute(int clientSocket, string& command) = 0;
 };
 
 

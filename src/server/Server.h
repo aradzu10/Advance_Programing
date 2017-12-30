@@ -20,15 +20,10 @@ public:
     ~Server();
 
     void Start();
-    void AcceptClient();
+    void* AcceptClient(void* nothing);
     //close server
     void Stop();
-    void HandleClient(int client);
-
-
-private:
-    //initiate server - create socket, bind and listening
-    void InitiateServer();
+    void* HandleClient(void* client);
 
 private:
     //members

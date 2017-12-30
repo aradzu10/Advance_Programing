@@ -11,7 +11,7 @@ Name: Arad Zulti
 #include <string.h>
 #include <cstring>
 
-MatchHandler::MatchHandler(int max) : maxDataSizeToTransfer(max), clientSocket1(0), clientSocket2(0) {
+MatchHandler::MatchHandler(int max) : gameStarted(false), maxDataSizeToTransfer(max), clientSocket1(0), clientSocket2(0) {
 }
 
 MatchHandler::~MatchHandler() {
@@ -26,7 +26,12 @@ void MatchHandler::setClientSocket2(int clientSocket2) {
     MatchHandler::clientSocket2 = clientSocket2;
 }
 
+bool MatchHandler::isGameStarted() const {
+    return gameStarted;
+}
+
 void MatchHandler::Start() {
+    gameStarted = true;
     InitiatePlayers();
     CommunicationStream();
 }

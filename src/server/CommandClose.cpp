@@ -8,8 +8,10 @@ Name: Arad Zulti
 
 CommandClose::CommandClose(MatchManager &matchManager) : matchManager(matchManager) {}
 
-CommandClose::~Command() {}
+CommandClose::~CommandClose() {
 
-void CommandClose::execute(int clientSocket, string &command) {
-    matchManager.CloseMatch(command);
+}
+
+int CommandClose::execute(int clientSocket, string &command) {
+    return matchManager.CloseMatch(command);
 }

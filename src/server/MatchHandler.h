@@ -22,6 +22,9 @@ public:
     void setClientSocket1(int clientSocket1);
 
     void setClientSocket2(int clientSocket2);
+
+    bool isGameStarted() const;
+
     //start server
     void Start();
     //close server
@@ -37,6 +40,7 @@ private:
 
 private:
     //members
+    bool gameStarted;
     int clientSocket1;
     int clientSocket2;
     int maxDataSizeToTransfer;

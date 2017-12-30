@@ -15,7 +15,12 @@ Name: Arad Zulti
 #include <string.h>
 #include <cstring>
 #include <iostream>
-#include "../connectionSetting/ConnectionSettings.h"
+#include <pthread.h>
+
+struct ServerAndClientSocket {
+    Server* server;
+    int ClientSocket;
+};
 
 Server::Server(int port, int max) : port(port), maxDataSizeToTransfer(max), matchManager(max) {
     commandManager.setMatchManager(matchManager);
@@ -48,25 +53,58 @@ void Server::Stop() {
     close(serverSocket);
 }
 
-void Server::AcceptClient() {
+static void *AcceptClient_Thread(void *context) {
+    return ((Server *)context)->AcceptClient(NULL);
+}
+
+static void *HandleClient_Thread(void *context) {
+    struct ServerAndClientSocket *args = (struct ServerAndClientSocket*) context;
+    return args->server->HandleClient((void*) args->ClientSocket);
+}
+
+void* Server::AcceptClient(void* nothing) {
+    pthread_t threadsAcceptClient;
+    pthread_t threadsHandleClient;
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = 0;
     int clientSocket = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
-    // add - thread for "AcceptClient"
-    if (clientSocket < 0) {
-        close(serverSocket);
-        throw "Error on accept";
+    int rc = pthread_create(&threadsAcceptClient, NULL, AcceptClient_Thread, this);
+    if (rc) {
+        cout << "Error: unable to create thread, " << rc << endl;
+        pthread_exit(NULL);
     }
-    // add - theard here
-    HandleClient(clientSocket);
+    struct ServerAndClientSocket args;
+    args.server = this;
+    args.ClientSocket = clientSocket;
+    rc = pthread_create(&threadsHandleClient, NULL, HandleClient_Thread, &args);
+    if (rc) {
+        cout << "Error: unable to create thread, " << rc << endl;
+        pthread_exit(NULL);
+    }
 }
 
-void Server::HandleClient(int client) {
+void* Server::HandleClient(void* clientT) {
+    long client = (long)clientT;
     char buffer[maxDataSizeToTransfer];
-    memset(buffer, 0, maxDataSizeToTransfer);
-    int check = read(client, buffer, maxDataSizeToTransfer);
-    if (check <= 0) {
-        return;
+    while(true) {
+        memset(buffer, 0, maxDataSizeToTransfer);
+        int check = read(client, buffer, maxDataSizeToTransfer);
+        if (check <= 0) {
+            pthread_exit(NULL);
+        }
+        if (commandManager.DoCommand(buffer, client) == 0) {
+            strcpy(buffer, "success");
+            check = send(client, buffer, maxDataSizeToTransfer, 0);
+            if (check <= 0) {
+                pthread_exit(NULL);
+            }
+            break;
+        } else {
+            strcpy(buffer, "failed");
+            check = send(client, buffer, maxDataSizeToTransfer, 0);
+            if (check <= 0) {
+                pthread_exit(NULL);
+            }
+        }
     }
-    commandManager.DoCommand(buffer, client);
 }

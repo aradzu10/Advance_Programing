@@ -26,11 +26,11 @@ public:
 
     vector<string> GetGamesList();
 
-    void CreateNewMatch(string& name, int firstClient);
+    int CreateNewMatch(string& name, int firstClient);
 
-    void JoinMatch(string& name, int secondClient);
+    int JoinMatch(string& name, int secondClient);
 
-    void CloseMatch(string& name);
+    int CloseMatch(string& name);
 
 private:
     map<string, MatchHandler*> matches;

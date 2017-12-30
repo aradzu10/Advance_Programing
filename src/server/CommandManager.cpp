@@ -5,6 +5,7 @@ ID: 315240564
 Name: Arad Zulti
 */
 #include <cstdio>
+#include <cstring>
 #include "CommandManager.h"
 #include "CommandClose.h"
 #include "CommandStart.h"
@@ -25,9 +26,11 @@ void CommandManager::setMatchManager(MatchManager &matchManager) {
     commands["close"] = new CommandClose(matchManager);
 }
 
-void CommandManager::DoCommand(char* userInput, int clientSocket) {
-    string command, input;
+int CommandManager::DoCommand(char* userInput, int clientSocket) {
+    char command[strlen(userInput)], input[strlen(userInput)];
     sscanf(userInput, "%s %s", command, input); // check - gamelist
-    Command *c = commands[command];
-    c->execute(clientSocket, input);
+    string sCommand(command);
+    string sInput(input);
+    Command *c = commands[sCommand];
+    return c->execute(clientSocket, sInput);
 }

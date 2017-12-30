@@ -10,15 +10,12 @@ Name: Arad Zulti
 #include "MatchManager.h"
 #include "Command.h"
 
-
 class CommandGamesList : public Command {
 
 public:
     CommandGamesList(MatchManager &matchManager);
-
     virtual ~CommandGamesList();
-
-    virtual void execute(int clientSocket, string command);
+    virtual int execute(int clientSocket, string& command);
 
 
 private:

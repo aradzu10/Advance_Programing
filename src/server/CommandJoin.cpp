@@ -8,8 +8,10 @@ Name: Arad Zulti
 
 CommandJoin::CommandJoin(MatchManager &matchManager) : matchManager(matchManager) {}
 
-CommandJoin::~Command() {}
+CommandJoin::~CommandJoin() {
 
-void CommandJoin::execute(int clientSocket, string &command) {
-    matchManager.JoinMatch(command, clientSocket);
+}
+
+int CommandJoin::execute(int clientSocket, string &command) {
+    return matchManager.JoinMatch(command, clientSocket);
 }
