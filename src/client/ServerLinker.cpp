@@ -13,6 +13,8 @@ Name: Arad Zulti
 #include <unistd.h>
 #include <cstring>
 #include "../connectionSetting/ConnectionSettings.h"
+#include <iostream>
+using namespace std;
 
 ServerLinker::ServerLinker() : clientSocket(0), connnectedToServer(false) {
     ConnectionSettings settings("connection_settings_client.txt");
@@ -36,26 +38,30 @@ bool ServerLinker::isConnnectedToServer() const {
 
 void ServerLinker::ConnectToServer() {
     clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-    if (clientSocket == -1) {
-        throw "Error opening socket";
+    if (clientSocket <= 0) {
+        cout <<  "Error opening socket" << endl;
+        return;
     }
     struct in_addr address;
     if (!inet_aton(serverIP.c_str(), &address)) {
-        throw "Can't parse IP address";
+        cout <<  "Can't parse IP address" << endl;
+        return;
     }
     struct hostent *server;
     server = gethostbyaddr((const void *)&address, sizeof
             address, AF_INET);
     if (server == NULL) {
-        throw "Host is unreachable";
+        cout <<  "Host is unreachable" << endl;
+        return;
     }
     struct sockaddr_in serverAddress;
     memset((char*)&address, 0, sizeof(address));
     serverAddress.sin_family = AF_INET;
     memcpy((char *)&serverAddress.sin_addr.s_addr, server->h_addr, server->h_length);
     serverAddress.sin_port = htons(serverPort);
-    if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
-        throw "Error connecting to server";
+    if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) <= 0) {
+        cout <<  "Error connecting to server" << endl;
+        return;
     }
     connnectedToServer = true;
 }

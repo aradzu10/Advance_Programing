@@ -20,7 +20,7 @@ Name: Arad Zulti
 
 struct ServerAndClientSocket {
     Server* server;
-    int ClientSocket;
+    long ClientSocket;
 };
 
 Server::Server(int port, int max) : port(port), maxDataSizeToTransfer(max), matchManager(max) {
@@ -81,6 +81,8 @@ void* Server::AcceptClient(void* nothing) {
     struct ServerAndClientSocket args;
     args.server = this;
     args.ClientSocket = clientSocket;
+//    cout << "1: " << clientSocket << endl;
+//    cout << "1: " << args.ClientSocket << endl;
     rc = pthread_create(&threadsHandleClient, NULL, HandleClient_Thread, &args);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
@@ -89,13 +91,14 @@ void* Server::AcceptClient(void* nothing) {
 }
 
 void* Server::HandleClient(void* clientT) {
-    int client = *((int*)(&clientT));
+    long client = (long) clientT;
+//    cout << "2: " << client << endl;
     char buffer[maxDataSizeToTransfer];
     while(true) {
         memset(buffer, 0, maxDataSizeToTransfer);
         int check = read(client, buffer, maxDataSizeToTransfer);
         if (check < 0) {
-            cout << "not good: " << client << endl;
+            cout << "Error with client: " << client << endl;
             break;
         }
         int ans = commandManager.DoCommand(buffer, client);

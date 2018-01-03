@@ -67,8 +67,10 @@ void Reversi::SetupRemoteGame() {
 	Graphic *printer = new ConsolePrinter();
 	game.SetPrinter(printer);
 	link->ConnectToServer();
-	printer->PrintMessage("connected to server");
-	ClientMenu(link, printer);
+	if (link->isConnnectedToServer()) {
+		printer->PrintMessage("connected to server");
+		ClientMenu(link, printer);
+	}
 
 }
 

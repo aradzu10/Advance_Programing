@@ -17,10 +17,6 @@ MatchManager::MatchManager() {
 MatchManager::MatchManager(int max) : maxDataSizeToTransfer(max) {
 }
 
-void MatchManager::setMaxDataSizeToTransfer(int maxDataSizeToTransfer) {
-    MatchManager::maxDataSizeToTransfer = maxDataSizeToTransfer;
-}
-
 MatchManager::~MatchManager() {
     CloseAll();
 }

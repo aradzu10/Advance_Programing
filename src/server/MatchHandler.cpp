@@ -37,7 +37,7 @@ void MatchHandler::Start() {
 }
 
 void MatchHandler::InitiatePlayers() {
-    int size = 1;
+    int size = 2;
     std::string black = "1";
     std::string white = "2";
     int check = send(clientSocket1, &size, sizeof(size), 0);

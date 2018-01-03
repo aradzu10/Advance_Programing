@@ -1,3 +1,81 @@
+commit c41d6bd081200c8a3400b4e99c5f903471e51a22
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Jan 3 10:43:24 2018 +0200
+
+    ex6 done
+
+commit f88ddc9c8bfae9dde1ae710b5a1377ffc6e77db7
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Wed Jan 3 10:34:43 2018 +0200
+
+    ex6 almost done
+
+commit e64908b63a416be1f8a59a16316ea696be6528b5
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 30 19:54:39 2017 +0200
+
+    ex5
+
+commit 93ae762fe2f601f81e943752ebaac53080bf2fda
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 30 15:13:34 2017 +0200
+
+    ex5
+
+commit 6103d9935befadef2f52850a134c77899909bb8a
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 30 12:24:42 2017 +0200
+
+    ex5
+
+commit 8f6989311c900ad3d1a1fc4dc4bc2df0253425c1
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Fri Dec 29 22:12:49 2017 +0200
+
+    ex5
+
+commit 3345ac76113e5652712d6321d2989353746fa17c
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Fri Dec 29 22:07:03 2017 +0200
+
+    ex4 done
+
+commit 90bc57c2bddc992f9145e2ac8c5279b93eaae73a
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Thu Dec 28 18:57:25 2017 +0200
+
+    ex4 done
+
+commit dc9de077947041d9eb6a0dec47777083651328af
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Thu Dec 28 18:12:35 2017 +0200
+
+    ex4 done
+
+commit b40d4bf47016bb5a261ac9b96d8e8e72a778b7e6
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 17:13:59 2017 +0200
+
+    ex4 done
+
+commit 468a21856c62fca99765ab5ca7f8b36985a52a17
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 16:56:50 2017 +0200
+
+    ex4 done
+
+commit c708eab37ffabd83ab335bfb8c50049caa045874
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 16:46:51 2017 +0200
+
+    ex4 done
+
+commit b9389031c513d86e642c3a459fe117841e1cdde9
+Author: aradzu10 <aradzulti@gmail.com>
+Date:   Sat Dec 9 16:29:11 2017 +0200
+
+    ex4 done
+
 commit 86bda2000773e230cdc1ab4770b637b14ef6fb70
 Author: aradzu10 <aradzulti@gmail.com>
 Date:   Sat Dec 9 16:17:41 2017 +0200
