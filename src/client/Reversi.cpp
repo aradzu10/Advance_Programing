@@ -76,9 +76,9 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 	char *tmp;
 	while(link->isConnnectedToServer()) {
 		printer->PrintMessage("Choose Option:");
-		printer->PrintMessage("1. list games");
-		printer->PrintMessage("2. join <game name>");
-		printer->PrintMessage("3. start <game name>");
+		printer->PrintMessage("list games");
+		printer->PrintMessage("join <game name>");
+		printer->PrintMessage("start <game name>");
 		string input = printer->GetDataFromUser();
 		if (input.find("start") == 0 || input.find("join") == 0) {
 			link->WriteDataToServer(input.c_str(), input.size());

@@ -18,15 +18,17 @@ public:
     Server(int port, int max);
 
     ~Server();
-
+    // start server
     void Start();
+    // accept new client (in new thread)
     void* AcceptClient(void* nothing);
-    //close server
+    // close server
     void Stop();
+    // handle new client (in new thread)
     void* HandleClient(void* client);
 
 private:
-    //members
+    // members
     int port;
     int maxDataSizeToTransfer;
     int serverSocket;

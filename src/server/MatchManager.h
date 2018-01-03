@@ -21,17 +21,15 @@ public:
     MatchManager(int max);
 
     ~MatchManager();
-
+    // close all matches
     void CloseAll();
-
-    void setMaxDataSizeToTransfer(int maxDataSizeToTransfer);
-
+    // return game list
     vector<string> GetGamesList();
-
+    // create new match, and set first client
     int CreateNewMatch(string& name, int firstClient);
-
+    // set second client in match and start match
     int JoinMatch(string& name, int secondClient);
-
+    // close match - close clients and earse game from list
     int CloseMatch(const string& name);
 
 private:

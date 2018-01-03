@@ -15,6 +15,7 @@ class CommandGamesList : public Command {
 public:
     CommandGamesList(MatchManager &matchManager);
     virtual ~CommandGamesList();
+    // do game list command
     virtual int execute(int clientSocket, string& command);
 
 

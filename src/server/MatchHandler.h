@@ -18,16 +18,16 @@ public:
     MatchHandler(int max);
 
     ~MatchHandler();
-
+    // set first client
     void setClientSocket1(int clientSocket1);
-
+    // set second client
     void setClientSocket2(int clientSocket2);
-
+    // check if there are 2 players (game started)
     bool isGameStarted() const;
 
-    //start server
+    //start match
     void Start();
-    //close server
+    //close clients
     void Close();
 
 private:

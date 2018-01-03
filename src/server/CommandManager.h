@@ -19,8 +19,9 @@ public:
     CommandManager(MatchManager &matchManager);
 
     virtual ~CommandManager();
-
+    // set match manager for commands
     void setMatchManager(MatchManager &matchManager);
+    // do certain command
     int DoCommand(char* userInput, int clientSocket);
 
 private:

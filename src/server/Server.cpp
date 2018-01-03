@@ -81,8 +81,6 @@ void* Server::AcceptClient(void* nothing) {
     struct ServerAndClientSocket args;
     args.server = this;
     args.ClientSocket = clientSocket;
-    cout << "1: " << clientSocket << endl;
-    cout << "1: " << args.ClientSocket << endl;
     rc = pthread_create(&threadsHandleClient, NULL, HandleClient_Thread, &args);
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
@@ -92,7 +90,6 @@ void* Server::AcceptClient(void* nothing) {
 
 void* Server::HandleClient(void* clientT) {
     int client = *((int*)(&clientT));
-    cout << "2: " << client << endl;
     char buffer[maxDataSizeToTransfer];
     while(true) {
         memset(buffer, 0, maxDataSizeToTransfer);

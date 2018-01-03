@@ -17,6 +17,7 @@ class CommandStart : public Command {
 public:
     CommandStart(MatchManager &matchManager);
     virtual ~CommandStart();
+    // do start command
     virtual int execute(int clientSocket, string& command);
 
 private:

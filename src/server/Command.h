@@ -10,6 +10,7 @@ Name: Arad Zulti
 #include <iostream>
 using namespace std;
 
+// command interface.
 class Command {
 
 public:

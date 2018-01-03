@@ -10,12 +10,13 @@ Name: Arad Zulti
 
 #include "MatchManager.h"
 #include "Command.h"
-
+// command close
 class CommandClose : public Command {
 
 public:
     CommandClose(MatchManager &matchManager);
     virtual ~CommandClose();
+    // do close command
     virtual int execute(int clientSocket, string& command);
 
 private:
