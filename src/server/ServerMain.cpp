@@ -38,5 +38,6 @@ int main() {
         pthread_exit(NULL);
     }
     CloseOperation(server);
+    delete server;
     return 0;
 }

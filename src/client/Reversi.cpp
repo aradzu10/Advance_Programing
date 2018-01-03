@@ -99,6 +99,7 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 				printer->PrintMessage("There are no Games");
 				continue;
 			}
+			printer->PrintMessage("All online games:");
 			for (int i = 0; i < len; i++) {
 				int nameSize = link->ReadNumberFromServer();
 				tmp = link->ReadDataFromServer(nameSize);
@@ -112,6 +113,7 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 	}
 	printer->PrintMessage("waiting for opponent");
 	if (strcmp(tmp, "success") == 0) {
+        delete tmp;
 		int num = link->ReadNumberFromServer();
 		tmp = link->ReadDataFromServer(num);
 	}

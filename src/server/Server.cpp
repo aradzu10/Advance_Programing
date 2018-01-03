@@ -52,6 +52,8 @@ void Server::Start() {
 
 void Server::Stop() {
     matchManager.CloseAll();
+    pthread_cancel(threadsAcceptClient);
+    pthread_join(threadsAcceptClient, NULL);
     close(serverSocket);
 }
 
@@ -65,7 +67,6 @@ static void *HandleClient_Thread(void *context) {
 }
 
 void* Server::AcceptClient(void* nothing) {
-    pthread_t threadsAcceptClient;
     pthread_t threadsHandleClient;
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = 0;
@@ -86,6 +87,7 @@ void* Server::AcceptClient(void* nothing) {
     if (rc) {
         cout << "Error: unable to create thread, " << rc << endl;
     }
+    pthread_detach(pthread_self());
 }
 
 void* Server::HandleClient(void* clientT) {
@@ -122,4 +124,5 @@ void* Server::HandleClient(void* clientT) {
             }
         }
     }
+    pthread_detach(pthread_self());
 }

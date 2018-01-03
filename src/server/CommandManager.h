@@ -17,6 +17,9 @@ class CommandManager {
 public:
     CommandManager();
     CommandManager(MatchManager &matchManager);
+
+    virtual ~CommandManager();
+
     void setMatchManager(MatchManager &matchManager);
     int DoCommand(char* userInput, int clientSocket);
 

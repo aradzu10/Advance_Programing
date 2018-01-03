@@ -32,6 +32,8 @@ private:
     int serverSocket;
     MatchManager matchManager;
     CommandManager commandManager;
+    pthread_t threadsAcceptClient;
+
 };
 
 

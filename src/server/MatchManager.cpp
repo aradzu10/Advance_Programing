@@ -5,7 +5,11 @@ ID: 315240564
 Name: Arad Zulti
 */
 
+#include <sstream>
+#include <pthread.h>
 #include "MatchManager.h"
+
+pthread_mutex_t map_mutex;
 
 MatchManager::MatchManager() {
 }
@@ -30,9 +34,12 @@ void MatchManager::CloseAll() {
 vector<string> MatchManager::GetGamesList() {
     vector<string> matchesName;
     for (map<string, MatchHandler *>::iterator it = matches.begin(); it != matches.end(); ++it) {
-        if (!it->second->isGameStarted()) {
-            matchesName.push_back(it->first);
+        stringstream ss;
+        ss << it->first;
+        if (it->second->isGameStarted()) {
+            ss << " - game started";
         }
+        matchesName.push_back(ss.str());
     }
     return matchesName;
 }
@@ -41,7 +48,9 @@ int MatchManager::CreateNewMatch(string &name, int firstClient) {
     if (matches.find(name) == matches.end()) {
         MatchHandler *matchHandler = new MatchHandler(maxDataSizeToTransfer);
         matchHandler->setClientSocket1(firstClient);
+        pthread_mutex_lock(&map_mutex);
         matches[name] = matchHandler;
+        pthread_mutex_unlock(&map_mutex);
         return 0;
     }
     return 1;
@@ -62,6 +71,8 @@ int MatchManager::CloseMatch(const string &name) {
         return 1;
     }
     matches[name]->Close();
+    pthread_mutex_lock(&map_mutex);
     matches.erase(name);
+    pthread_mutex_unlock(&map_mutex);
     return 0;
 }

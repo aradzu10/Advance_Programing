@@ -19,6 +19,12 @@ CommandManager::CommandManager(MatchManager &matchManager) {
     setMatchManager(matchManager);
 }
 
+CommandManager::~CommandManager() {
+    for (map<string, Command*>::iterator it = commands.begin(); it != commands.end(); ++it) {
+        delete it->second;
+    }
+}
+
 void CommandManager::setMatchManager(MatchManager &matchManager) {
     commands["start"] = new CommandStart(matchManager);
     commands["join"] = new CommandJoin(matchManager);
