@@ -27,12 +27,12 @@ int CommandGamesList::execute(int clientSocket, string &command) {
         return 0;
     }
     for (int i = 0; i < size; i++) {
-        int len = names[i].size();
+        int len = names[i].size() + 1;
         check = send(clientSocket, &len, sizeof(len), 0);
         if (check <= 0) {
             return 0;
         }
-        check = send(clientSocket, names[i].c_str(), names[i].size(), 0);
+        check = send(clientSocket, names[i].c_str(), len, 0);
         if (check <= 0) {
             return 0;
         }

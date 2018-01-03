@@ -81,18 +81,18 @@ void* Server::AcceptClient(void* nothing) {
     struct ServerAndClientSocket args;
     args.server = this;
     args.ClientSocket = clientSocket;
-//    cout << "1: " << clientSocket << endl;
-//    cout << "1: " << args.ClientSocket << endl;
+    cout << "1: " << clientSocket << endl;
+    cout << "1: " << args.ClientSocket << endl;
     rc = pthread_create(&threadsHandleClient, NULL, HandleClient_Thread, &args);
     if (rc) {
-        cout << "Error: unable to create thread, " << rc << endl;
+        cout << "Error: unable to create thread " << rc << endl;
     }
     pthread_detach(pthread_self());
 }
 
 void* Server::HandleClient(void* clientT) {
     long client = (long) clientT;
-//    cout << "2: " << client << endl;
+    cout << "2: " << client << endl;
     char buffer[maxDataSizeToTransfer];
     while(true) {
         memset(buffer, 0, maxDataSizeToTransfer);
@@ -102,27 +102,22 @@ void* Server::HandleClient(void* clientT) {
             break;
         }
         int ans = commandManager.DoCommand(buffer, client);
-        if (ans == 0) {
-            string msg = "success";
-            int size = msg.size();
-            check = send(client, &size, sizeof(size), 0);
-            if (check <= 0) {
-                break;
-            }
-            send(client, msg.c_str(), msg.size(), 0);
-            break;
-        } else if (ans == 1){
-            string msg = "failed";
-            int size = msg.size();
-            check = send(client, &size, sizeof(size), 0);
-            if (check <= 0) {
-                break;
-            }
-            check = send(client, msg.c_str(), msg.size(), 0);
-            if (check <= 0) {
-                break;
-            }
+        if (ans != 0 && ans != 1) {
+            continue;
         }
+        string msg;
+        if (ans == 0) {
+            msg = "success";
+        } else if (ans == 1){
+            msg = "failed";
+        }
+        int size = msg.size() + 1;
+        check = send(client, &size, sizeof(size), 0);
+        if (check <= 0) {
+            break;
+        }
+        send(client, msg.c_str(), msg.size(), 0);
+        break;
     }
     pthread_detach(pthread_self());
 }

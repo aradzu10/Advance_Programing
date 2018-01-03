@@ -59,7 +59,7 @@ void ServerLinker::ConnectToServer() {
     serverAddress.sin_family = AF_INET;
     memcpy((char *)&serverAddress.sin_addr.s_addr, server->h_addr, server->h_length);
     serverAddress.sin_port = htons(serverPort);
-    if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) <= 0) {
+    if (connect(clientSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) <= -1) {
         cout <<  "Error connecting to server" << endl;
         return;
     }
