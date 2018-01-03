@@ -19,6 +19,10 @@ RemotePlayerReceiver::~RemotePlayerReceiver() {
 
 Point RemotePlayerReceiver::GetPointFromPlayer() {
     char *point = serverLinker->ReadDataFromServer();
+    if (!serverLinker->isConnnectedToServer()) {
+        graphic->PrintMessage("Game disconnected...");
+        return Point(-1, 0);
+    }
     if (!strcmp(point, "NoMove")) {
         return Point(-2, 0);
     }

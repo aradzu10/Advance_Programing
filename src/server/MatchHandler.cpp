@@ -7,9 +7,11 @@ Name: Arad Zulti
 
 #include "MatchHandler.h"
 #include <sys/socket.h>
+#include <iostream>
 #include <unistd.h>
 #include <string.h>
 #include <cstring>
+using  namespace std;
 
 MatchHandler::MatchHandler(int max) : gameStarted(false), maxDataSizeToTransfer(max), clientSocket1(0), clientSocket2(0) {
 }

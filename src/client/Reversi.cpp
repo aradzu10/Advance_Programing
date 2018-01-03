@@ -113,6 +113,10 @@ void Reversi::ClientMenu(ServerLinker *link, Graphic *printer) {
 			printer->PrintMessage("Invalid input!");
 		}
 	}
+	if (!link->isConnnectedToServer()) {
+		printer->PrintMessage("server has disconnected");
+		return;
+	}
 	printer->PrintMessage("waiting for opponent");
 	if (strcmp(tmp, "success") == 0) {
         delete tmp;

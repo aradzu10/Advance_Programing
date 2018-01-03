@@ -74,4 +74,5 @@ void GameManager::StartGame() {
 		currentPlayer = nextPlayer;
 		nextPlayer = tmpP;
 	}
+	printer->PrintMessage("Game Ended");
 }
