@@ -2,13 +2,13 @@ commit c41d6bd081200c8a3400b4e99c5f903471e51a22
 Author: aradzu10 <aradzulti@gmail.com>
 Date:   Wed Jan 3 10:43:24 2018 +0200
 
-    ex6 done
+    ex5 done
 
 commit f88ddc9c8bfae9dde1ae710b5a1377ffc6e77db7
 Author: aradzu10 <aradzulti@gmail.com>
 Date:   Wed Jan 3 10:34:43 2018 +0200
 
-    ex6 almost done
+    ex5 almost done
 
 commit e64908b63a416be1f8a59a16316ea696be6528b5
 Author: aradzu10 <aradzulti@gmail.com>

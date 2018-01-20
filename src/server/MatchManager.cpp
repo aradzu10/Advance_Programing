@@ -29,6 +29,7 @@ void MatchManager::CloseAll() {
 
 vector<string> MatchManager::GetGamesList() {
     vector<string> matchesName;
+    pthread_mutex_lock(&map_mutex);
     for (map<string, MatchHandler *>::iterator it = matches.begin(); it != matches.end(); ++it) {
         stringstream ss;
         ss << it->first;
@@ -37,6 +38,7 @@ vector<string> MatchManager::GetGamesList() {
         }
         matchesName.push_back(ss.str());
     }
+    pthread_mutex_unlock(&map_mutex);
     return matchesName;
 }
 

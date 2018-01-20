@@ -6,6 +6,7 @@ Name: Arad Zulti
 */
 
 #define MAX_CONNECTIONS 10
+#define NUM_THEARDS 5
 
 #include "Server.h"
 #include "MatchManager.h"
@@ -22,8 +23,9 @@ struct ServerAndClientSocket {
     Server* server;
     long ClientSocket;
 };
+typedef struct ServerAndClientSocket ServerAndClientSocket;
 
-Server::Server(int port, int max) : port(port), maxDataSizeToTransfer(max), matchManager(max) {
+Server::Server(int port, int max) : port(port), maxDataSizeToTransfer(max), matchManager(max), threadPool(NUM_THEARDS) {
     commandManager.setMatchManager(matchManager);
 }
 
@@ -52,8 +54,7 @@ void Server::Start() {
 
 void Server::Stop() {
     matchManager.CloseAll();
-    pthread_cancel(threadsAcceptClient);
-    pthread_join(threadsAcceptClient, NULL);
+    threadPool.terminate();
     close(serverSocket);
 }
 
@@ -62,36 +63,32 @@ static void *AcceptClient_Thread(void *context) {
 }
 
 static void *HandleClient_Thread(void *context) {
-    struct ServerAndClientSocket *args = (struct ServerAndClientSocket*) context;
-    return args->server->HandleClient((void*) args->ClientSocket);
+    ServerAndClientSocket *args = (ServerAndClientSocket*) context;
+    return args->server->HandleClient(context);
 }
 
 void* Server::AcceptClient(void* nothing) {
-    pthread_t threadsHandleClient;
     struct sockaddr_in clientAddress;
     socklen_t clientAddressLen = 0;
     int clientSocket = accept(serverSocket, (struct sockaddr *) &clientAddress, &clientAddressLen);
-    int rc = pthread_create(&threadsAcceptClient, NULL, AcceptClient_Thread, this);
-    if (rc) {
-        cout << "Error: unable to create thread, " << rc << endl;
-    }
+    Task *acceptClient = new Task(AcceptClient_Thread, this);
+    threadPool.addTask(acceptClient);
     if (clientSocket < 1) {
         cout << "Error: connecting to client" << endl;
     }
-    struct ServerAndClientSocket args;
-    args.server = this;
-    args.ClientSocket = clientSocket;
+    ServerAndClientSocket *args = new ServerAndClientSocket();
+    args->server = this;
+    args->ClientSocket = clientSocket;
     cout << "1: " << clientSocket << endl;
-    cout << "1: " << args.ClientSocket << endl;
-    rc = pthread_create(&threadsHandleClient, NULL, HandleClient_Thread, &args);
-    if (rc) {
-        cout << "Error: unable to create thread " << rc << endl;
-    }
-    pthread_detach(pthread_self());
+    cout << "1: " << args->ClientSocket << endl;
+    Task *handleClient = new Task(HandleClient_Thread, args);
+    threadPool.addTask(handleClient);
 }
 
 void* Server::HandleClient(void* clientT) {
-    long client = (long) clientT;
+    ServerAndClientSocket *args = (ServerAndClientSocket*) clientT;
+    long client = args->ClientSocket;
+    delete args;
     cout << "2: " << client << endl;
     char buffer[maxDataSizeToTransfer];
     while(true) {
@@ -119,5 +116,4 @@ void* Server::HandleClient(void* clientT) {
         send(client, msg.c_str(), msg.size(), 0);
         break;
     }
-    pthread_detach(pthread_self());
 }

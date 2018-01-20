@@ -23,7 +23,7 @@ set(SERVER_SOURCE_FILE src/server/MatchHandler.cpp src/server/MatchHandler.h src
         src/server/CommandManager.h src/server/Command.cpp src/server/Command.h src/server/MatchManager.cpp
         src/server/MatchManager.h src/server/CommandGamesList.cpp src/server/CommandGamesList.h src/server/CommandStart.cpp
         src/server/CommandStart.h src/server/CommandJoin.cpp src/server/CommandJoin.h src/server/CommandClose.cpp
-        src/server/CommandClose.h)
+        src/server/CommandClose.h src/server/Task.h src/server/TheardPool.cpp src/server/TheardPool.h)
 
 set(TEST_FILES src/client/tests/Temp.cpp src/client/tests/AIPlayer.cpp src/client/tests/BoardManager_Test.cpp
         src/client/tests/RegularRule_Test.cpp src/client/tests/ConsolePrinter_Test.cpp)
